@@ -8,24 +8,15 @@ const Products = db.define('products',{
     description:{
         type: Sequelize.STRING
     },
-    category:{
-        type:Sequelize.STRING
-    },
     quantity:{
         type:Sequelize.INTEGER
     },
     cost:{
-        type:Sequelize.INTEGER
-    },
-    roomId:{
-        type:Sequelize.INTEGER
-    },
-    typeId:{
-        type:Sequelize.INTEGER
+        type:Sequelize.DECIMAL
     },
     imageUrl:{
-        type:Sequelize.STRING
+        type:Sequelize.STRING(1000000)
     },
 });
 
-module.exports = {Products};
+module.exports = Products;

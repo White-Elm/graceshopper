@@ -9,32 +9,32 @@ const Customer = require('./models/Customer');
 const Invoice = require('./models/Invoice');
 const Product = require('./models/Product');
 const Room = require('./models/Room');
+const ProductType = require('./models/ProductType');
 const User = require('./models/User');
 
 
 //associations could go here!
 
-Admin.belongsTo(User);
 User.hasMany(Admin);
+Admin.belongsTo(User);
 
 Cart.belongsTo(Customer);
-Customer.hasOne(Cart);
+Customer.hasMany(Cart);
 
-Customer.belongsTo(User);
 User.hasMany(Customer);
+Customer.belongsTo(User);
 
+Cart.belongsTo(Product);
+Product.hasMany(Cart);
+Invoice.belongsTo(Product);
+Product.hasMany(Invoice);
 Invoice.belongsTo(Customer);
-Invoice.hasOne(Customer);
+Customer.hasMany(Invoice);
 
-Product.belongsTo(Cart);
-Cart.hasMany(Product);
-Product.belongsTo(Invoice);
-Invoice.hasMany(Product);
-
-ProductType.belongsTo(Product);
+Product.belongsTo(ProductType);
 ProductType.hasMany(Product);
 
-Room.belongsTo(Product);
+Product.belongsTo(Room);
 Room.hasMany(Product);
 
 module.exports = {
@@ -45,6 +45,7 @@ module.exports = {
     Customer,
     Invoice,
     Product,
+    ProductType,
     Room,
     User
   },

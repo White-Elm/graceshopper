@@ -7,4 +7,4 @@ const ProductType = db.define('productType',{
       }
 });
 
-module.exports = {ProductType};
+module.exports = ProductType;

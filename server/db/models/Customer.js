@@ -8,15 +8,10 @@ const Customer = db.define('customer',{
     lastName:{
         type: Sequelize.STRING
     },
-    username:{
-        type:Sequelize.STRING,
-        unique:true,
-        allowNull: false
-    },
     address:{
         type:Sequelize.STRING,
         allowNull: false
     }
 });
 
-module.exports = {Customer};
+module.exports = Customer;

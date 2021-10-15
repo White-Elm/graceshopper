@@ -7,4 +7,4 @@ const Room = db.define('room',{
       }
 });
 
-module.exports = {Room};
+module.exports = Room;

@@ -2,24 +2,18 @@ const Sequelize = require('sequelize');
 const db = require('../db');
 
 const Invoice = db.define('invoice',{
-    customerId: {
-        type: Sequelize.INTEGER
-      },
-    orderId:{
-        type: Sequelize.INTEGER
+    productName:{
+        type:Sequelize.STRING
     },
-    productId:{
-        type:Sequelize.INTEGER
-    },
-    productQuant:{
-        type:Sequelize.INTEGER
-    },
-    invoiceTotal:{
-        type:Sequelize.INTEGER
+    productQty:{
+        type:Sequelize.DECIMAL
     },
     productTotal:{
-        type:Sequelize.INTEGER
+        type:Sequelize.DECIMAL
+    },
+    invoiceTotal:{
+        type:Sequelize.DECIMAL
     },
 });
 
-module.exports = {Invoice}
+module.exports = Invoice;

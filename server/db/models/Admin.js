@@ -7,12 +7,7 @@ const Admin = db.define('admin',{
       },
     lastName:{
         type: Sequelize.STRING
-    },
-    username:{
-        type:Sequelize.STRING,
-        unique: true,
-        allowNull: false
     }
 });
 
-module.exports = {Admin};
+module.exports = Admin;

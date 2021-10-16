@@ -1,7 +1,7 @@
 {
   "name": "white-elm",
-  "version": "2.0.0",
-  "description": "Some boilerplate code to get you started - get shakin'!",
+  "version": "1.0.0",
+  "description": "we're better than ikea",
   "main": "index.js",
   "scripts": {
     "build": "webpack",

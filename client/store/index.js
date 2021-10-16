@@ -10,33 +10,37 @@ const LOAD_PRODUCTS = 'LOAD_PRODUCTS';
 
 const productReducers = (state = [], action) =>{
   if(action.type === LOAD_PRODUCTS){
-    state = action.students;
+    state = action.products;
   }
   return state;
 }
 
-const reducer = combineReducers({ auth })
+const reducer = combineReducers({ 
+  auth, 
+  products: productReducers, 
+})
+
 const middleware = composeWithDevTools(
   applyMiddleware(thunkMiddleware, createLogger({collapsed: true}))
 )
 const store = createStore(reducer, middleware)
 
 
+const loadProducts = () =>{
+    return (dispatch) =>{
+        //const products = (await axios.get('/api/products')).data
+        const products = [{name: 'cup', id: 1}, {name: 'bowl', id: 2 }, {name: 'spoon', id: 3 }]
+        dispatch(_loadProducts(products))
+    }
+}
 
 const _loadProducts = (products) =>{
     return {
         type: LOAD_PRODUCTS,
         products,
     }
-
 }
 
-const loadProducts = () =>{
-    return async (dispatch) =>{
-        const products = (await axios.get('/api/products')).data
-        dispatch(_loadProducts(products))
-    }
-}
 
 
 export default store

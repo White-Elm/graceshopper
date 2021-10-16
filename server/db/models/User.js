@@ -1,11 +1,12 @@
-const Sequelize = require('sequelize')
-const db = require('../db')
-const jwt = require('jsonwebtoken')
+const Sequelize = require('sequelize');
+const db = require('../db');
+const jwt = require('jsonwebtoken');
 const bcrypt = require('bcrypt');
 const axios = require('axios');
 
 const SALT_ROUNDS = 5;
 
+//this is the login information from our whiteboard
 const User = db.define('user', {
   username: {
     type: Sequelize.STRING,
@@ -15,7 +16,7 @@ const User = db.define('user', {
   password: {
     type: Sequelize.STRING,
   }
-})
+});
 
 module.exports = User
 

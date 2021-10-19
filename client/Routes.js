@@ -3,9 +3,10 @@ import {connect} from 'react-redux'
 import {withRouter, Route, Switch, Redirect} from 'react-router-dom'
 import { Login, Signup } from './components/AuthForm';
 import Home from './components/Home';
-import {me} from './store'
-import SingleProduct from './components/SingleProduct'
-import {loadProducts, _loadProducts} from './store/index'
+import {me} from './store';
+import SingleProduct from './components/SingleProduct';
+import Products from './components/Products';
+import {loadProducts, _loadProducts} from './store/index';
 
 /**
  * COMPONENT
@@ -28,10 +29,12 @@ class Routes extends Component {
           </Switch>
         ) : (
           <Switch>
-            <Route path='/' exact component={ Login } />
+            <Route exact path='/' component={ Login } />
             <Route path="/login" component={Login} />
             <Route path="/signup" component={Signup} />
-            <Route path='/product' component={SingleProduct}/>
+            <Route exact path='/products' component={Products}/>
+            <Route exact path='/products/:id' component={SingleProduct}/>
+
           </Switch>
         )}
       </div>
@@ -55,7 +58,7 @@ const mapDispatch = dispatch => {
     loadInitialData() {
       dispatch(me())
     },
-    _loadProducts : () =>{
+    _loadProducts : async () =>{
       dispatch(loadProducts())
     }
   }

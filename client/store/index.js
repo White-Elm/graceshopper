@@ -27,9 +27,9 @@ const store = createStore(reducer, middleware)
 
 
 const loadProducts = () =>{
-    return (dispatch) =>{
-        //const products = (await axios.get('/api/products')).data
-        const products = [{name: 'cup', id: 1}, {name: 'bowl', id: 2 }, {name: 'spoon', id: 3 }]
+    return async (dispatch) =>{
+        const products = (await axios.get('/api/products')).data
+        //const products = [{name: 'cup', id: 1}, {name: 'bowl', id: 2 }, {name: 'spoon', id: 3 }]
         dispatch(_loadProducts(products))
     }
 }

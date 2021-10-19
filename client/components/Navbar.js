@@ -5,12 +5,14 @@ import {logout} from '../store'
 
 const Navbar = ({handleClick, isLoggedIn}) => (
   <div>
-    <h1>FS-App-Template</h1>
+    <h1> <Link to='/'> WHITE ELM </Link> </h1>
     <nav>
       {isLoggedIn ? (
         <div>
           {/* The navbar will show these links after you log in */}
           <Link to="/home">Home</Link>
+          <Link to='/products'> SHOP </Link>
+          <Link to='/cart'> cart </Link>
           <a href="#" onClick={handleClick}>
             Logout
           </a>
@@ -18,6 +20,8 @@ const Navbar = ({handleClick, isLoggedIn}) => (
       ) : (
         <div>
           {/* The navbar will show these links before you log in */}
+          <Link to='/products'> SHOP </Link>
+          <Link to='/cart'> cart </Link>
           <Link to="/login">Login</Link>
           <Link to="/signup">Sign Up</Link>
         </div>

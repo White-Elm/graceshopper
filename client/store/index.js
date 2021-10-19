@@ -3,21 +3,13 @@ import {createLogger} from 'redux-logger'
 import thunkMiddleware from 'redux-thunk'
 import {composeWithDevTools} from 'redux-devtools-extension'
 import auth from './auth'
-import axios from 'axios'
-
-
-const LOAD_PRODUCTS = 'LOAD_PRODUCTS';
-
-const productReducers = (state = [], action) =>{
-  if(action.type === LOAD_PRODUCTS){
-    state = action.products;
-  }
-  return state;
-}
+import products from './products';
+import cart from './cart';
 
 const reducer = combineReducers({ 
-  auth, 
-  products: productReducers, 
+  auth,
+  products,
+  cart
 })
 
 const middleware = composeWithDevTools(
@@ -25,24 +17,7 @@ const middleware = composeWithDevTools(
 )
 const store = createStore(reducer, middleware)
 
-
-const loadProducts = () =>{
-    return (dispatch) =>{
-        //const products = (await axios.get('/api/products')).data
-        const products = [{name: 'cup', id: 1}, {name: 'bowl', id: 2 }, {name: 'spoon', id: 3 }]
-        dispatch(_loadProducts(products))
-    }
-}
-
-const _loadProducts = (products) =>{
-    return {
-        type: LOAD_PRODUCTS,
-        products,
-    }
-}
-
-
-
 export default store
 export * from './auth'
-export {loadProducts}
+export * from './products'
+export * from './cart'

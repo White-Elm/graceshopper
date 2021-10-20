@@ -23,13 +23,13 @@ router.get('/:id', async (req, res, next) => {
   }
 });
 
-// GET /api/products/type
-// filter products by type
-router.get('/type', async (req, res, next) => {
+// GET /api/products/productType/:id
+// filter products by type, selecting by productType id
+router.get('/productType/:id', async (req, res, next) => {
   try {
     const product = await Product.findAll({
       where: {
-        typeId: req.params.typeId
+        productTypeId: req.params.id
       }
     })
     res.send(product);
@@ -39,54 +39,16 @@ router.get('/type', async (req, res, next) => {
   }
 });
 
-// GET /api/products/room
-// filter products by room
-router.get('/room', async (req, res, next) => {
+// GET /api/products/roomType/:id
+// filter products by room, selecting by room id
+router.get('/room/:id', async (req, res, next) => {
   try {
     const product = await Product.findAll({
       where: {
-        roomId: req.params.roomId
+        roomId: req.params.id
       }
     })
     res.send(product);
-  }
-  catch (error) {
-    next(error);
-  }
-});
-
-// ** APIs for Admin access only:
-
-// POST /api/products
-// handles -create new product
-router.post('/', async (req, res, next) => {
-  try {
-    res.send(await Product.create(req.body));
-  }
-  catch (error) {
-    next(error);
-  }
-});
-
-// DELETE /api/products/:id
-// handles -delete product
-router.delete('/:id', async (req, res, next) => {
-  try {
-    const product = await Product.findByPk(req.params.id);
-    await product.destroy();
-    res.send(product);
-  }
-  catch (error) {
-    next(error);
-  }
-});
-
-// PUT /api/products/:id
-// handles -update/edit product
-router.put('/:id', async (req, res, next) => {
-  try {
-    const product = await Product.findByPk(req.params.id);
-    res.send(await product.update(req.body));
   }
   catch (error) {
     next(error);

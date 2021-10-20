@@ -1,16 +1,16 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { Link } from 'react-router-dom';
 
-const Products = ({ products }) => {
+const Cart = ({ cart }) => {
     return (
         <div>
             <ul>
-                {products.map((product) => {
+                {cart.map((product) => {
                     return (
                         <li key={product.id}>
                             <h2>
-                                <Link to={`/products/${product.id}`}> { product.name } </Link>
+                                { product.productName }
+                                ({ product.productQty })
                             </h2>
                         </li>
                     )
@@ -20,6 +20,6 @@ const Products = ({ products }) => {
     )
 };
 
-const mapStateToProps = ({ products }) => ({ products });
+const mapStateToProps = ({ cart }) => ({ cart });
 
-export default connect(mapStateToProps)(Products);
+export default connect(mapStateToProps)(Cart);

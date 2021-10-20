@@ -4,15 +4,12 @@ import {withRouter, Route, Switch, Redirect, Link} from 'react-router-dom'
 import { Login, Signup } from './components/AuthForm';
 import Home from './components/Home';
 import {me} from './store'
-
 import { fetchProducts } from './store/products';
 import Products from './components/Products';
-
 import { fetchCart } from './store/cart';
 import Cart from './components/Cart';
-
-// import SingleProduct from './components/SingleProduct'
-// import {loadProducts, _loadProducts} from './store/index'
+import SingleProduct from './components/SingleProduct';
+import {loadProducts, _loadProducts} from './store/index';
 
 /**
  * COMPONENT
@@ -32,9 +29,12 @@ class Routes extends Component {
       <div>
         <div>
           <Switch>
-            <Route exact path='/products' component={ Products } />
             <Route exact path='/cart' component={ Cart } />
-            {/* <Route path='/products/:id' component={ SingleProduct } /> */}
+            <Route exact path='/' component={ Login } />
+            <Route path="/login" component={Login} />
+            <Route path="/signup" component={Signup} />
+            <Route exact path='/products' component={Products}/>
+            <Route exact path='/products/:id' component={SingleProduct}/>
           </Switch>
         </div>
         <div>
@@ -48,7 +48,6 @@ class Routes extends Component {
               <Route path='/' exact component={ Login } />
               <Route path="/login" component={Login} />
               <Route path="/signup" component={Signup} />
-              {/* <Route path='/product' component={SingleProduct}/> */}
             </Switch>
           )}
         </div>
@@ -73,11 +72,12 @@ const mapDispatch = dispatch => {
     loadInitialData() {
       dispatch(me())
     },
-    // _loadProducts : () =>{
-    //   dispatch(loadProducts())
-    // },
+  //check both load products  
     loadProducts: () => dispatch(fetchProducts()),
     loadCart: () => dispatch(fetchCart())
+    _loadProducts : async () =>{
+      dispatch(loadProducts())
+    }
   }
 }
 

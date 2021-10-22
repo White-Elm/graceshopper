@@ -11,7 +11,8 @@ import { fetchCart } from './store/cart';
 import { fetchCustomer } from './store/customers';
 import Cart from './components/Cart';
 import SingleProduct from './components/SingleProduct';
-// import {loadProducts, _loadProducts} from './store/index';
+import {loadProducts, _loadProducts} from './store/productsReducer';
+
 
 /**
  * COMPONENT
@@ -75,10 +76,13 @@ const mapDispatch = dispatch => {
   //check both load products  
     loadProducts: () => dispatch(fetchProducts()),
     loadCart: () => dispatch(fetchCart()),
+    
+    _loadProducts : async () =>{
+      dispatch(loadProducts())
+    }
+
     loadCustomer: () => dispatch(fetchCustomer()),
-    // _loadProducts : async () =>{
-    //   dispatch(loadProducts())
-    // }
+
   }
 }
 

@@ -1,34 +1,48 @@
 import React, {Component} from 'react'
 import {connect} from 'react-redux';
-import {updateQty} from '../store/index';
+import {addToCart} from '../store/productsReducer';
 import {Link} from 'react-router-dom';
 
 class UpdateQty extends Component{
     constructor(props){
         super(props);
+        const {product} = this.props;
         this.state = {
-            productQty : ' '
+            productQty : ' ',
+            product: product,
         }
         this.onChange = this.onChange.bind(this)
+        this.onSubmit = this.onSubmit.bind(this)
     }
     onChange(event){
         this.setState({productQty: event.target.value})
         console.log(event.target.value)
     }
     onSubmit(event){
-        
-        const {product} = this.props;
+        const {productQty, product} = this.state;
+        console.log(product.name)
+        event.preventDefault();
+        this.props.addToCart(product.name, productQty)
+
+
     }
     render(){
-         
+        const {product} = this.state;
+        const stockArr = [];
+        for(let i = 1; i<=product.quantity; i++){
+            stockArr.push(i)
+        }
         const {productQty} = this.state;
         const {onChange, onSubmit} = this
         return(
-            <form>
+            <form onSubmit={onSubmit}>
                 <select value={productQty} name='productQty' onChange = {onChange}>
-                    <option value='1' onChange = {onChange}> 1 </option>
-                    <option value='2' onChange = {onChange}> 2 </option>
-                    <option value='3' onChange = {onChange}> 3 </option>
+                    {stockArr.map(stock =>{
+                        return(
+                        <option key = {stock} value={stock} onChange = {onChange}>
+                            {stock}
+                        </option>)
+                    })}
                 </select>
                 <button>Add to Cart</button>
             </form>
@@ -36,4 +50,16 @@ class UpdateQty extends Component{
     }
 }
 
-export default UpdateQty;
+const mapStateToProps = (state) =>{
+    return state;
+}
+
+const mapDispatchToProps = (dispatch, {history}) => {
+    return{
+        addToCart: (productName, productQty) =>{
+            dispatch(addToCart(productName, productQty, history))
+        }
+    }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(UpdateQty);

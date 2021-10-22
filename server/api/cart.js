@@ -16,7 +16,6 @@ router.get('/', async (req, res, next) => {
 // cart page per customer, selecting by customer id
 router.get('/customerId/:id', async (req, res, next) => {
     try {
-      console.log(Cart);
       const cart = await Cart.findAll({
         where: {
           customerId: req.params.id
@@ -33,7 +32,10 @@ router.get('/customerId/:id', async (req, res, next) => {
 // handles -create new cart item (includes product to cart)
 router.post('/', async (req, res, next) => {
   try {
-    res.send(await Cart.create(req.body));
+    res.send(await Cart.create({
+      productName: req.body.productName,
+      productQty: req.body.productQty,
+    }));
   }
   catch (error) {
     next(error);

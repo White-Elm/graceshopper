@@ -1,67 +1,27 @@
-/*
-
-import axios from 'axios'
-
-const LOAD_PRODUCTS = 'LOAD_PRODUCTS';
-
-const productReducers = (state = [], action) =>{
-    if(action.type === LOAD_PRODUCTS){
-        state = action.students;
-    }
-    return state;
-}
-
-const _loadProducts = (products) =>{
-    return {
-        type: LOAD_PRODUCTS,
-        products,
-    }
-
-}
-
-const loadProducts = () =>{
-    return async (dispatch) =>{
-        const products = (await axios.get('/api/products')).data
-        dispatch(_loadProducts(products))
-    }
-}
-
-export {loadProducts}
-
-*/
-
-import {createStore, combineReducers, applyMiddleware} from 'redux'
-import {createLogger} from 'redux-logger'
-import thunkMiddleware from 'redux-thunk'
-import {composeWithDevTools} from 'redux-devtools-extension'
-import auth from './auth'
 import axios from 'axios'
 
 
 const LOAD_PRODUCTS = 'LOAD_PRODUCTS';
+const ADD_TO_CART = 'ADD_TO_CART';
+const UPDATE_PRODUCT = 'UPDATE_PRODUCT';
 
 const productReducers = (state = [], action) =>{
   if(action.type === LOAD_PRODUCTS){
     state = action.products;
   }
+  if(action.type === ADD_TO_CART){
+      //not sure here...
+      state = [...state, action.product]
+  }
+  if(action.type === UPDATE_PRODUCT){
+      state = state.map(product => product.id !== action.product.id ? product : action.product)
+  }
   return state;
 }
-
-const reducer = combineReducers({ 
-  auth, 
-  products: productReducers, 
-})
-
-const middleware = composeWithDevTools(
-  applyMiddleware(thunkMiddleware, createLogger({collapsed: true}))
-)
-const store = createStore(reducer, middleware)
-
 
 const loadProducts = () =>{
     return async (dispatch) =>{
         const products = (await axios.get('/api/products')).data
-        //const products = [{name: 'cup', id: 1}, {name: 'bowl', id: 2 }, {name: 'spoon', id: 3 }]
         dispatch(_loadProducts(products))
     }
 }
@@ -72,9 +32,36 @@ const _loadProducts = (products) =>{
         products,
     }
 }
+//include userID
+const addToCart = (productName, productQty, history) =>{
+    return async (dispatch) =>{
+        const product = (await axios.put('/api/cart', {productName, productQty})).data
+        dispatch(_addToCart(product))
+        history.push('/cart')
+    }
+}
+
+const _addToCart = (product) =>{
+    return {
+        type: ADD_TO_CART,
+        product
+    }
+}
+
+const updateProduct = (id, productName, productDescription, productQuantity, productCost, history) =>{
+    return async (dispatch) =>{
+        const product = (await axios.put(`/api/product/${id}`, {productName, productDescription, productQuantity, productCost})).data
+        dispatch(__updateProduct(product))
+        history.push(`/product/${id}`)
+    }
+}
+
+const __updateProduct = (product) =>{
+    return {
+        type: UPDATE_PRODUCT,
+        product
+    }
+}
 
 
-
-export default store
-export * from './auth'
-export {loadProducts}
+export {loadProducts, addToCart, updateProduct}

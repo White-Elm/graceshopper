@@ -16,7 +16,6 @@ router.get('/', async (req, res, next) => {
 // cart page per customer, selecting by customer id
 router.get('/customerId/:id', async (req, res, next) => {
     try {
-      console.log(Cart);
       const cart = await Cart.findAll({
         where: {
           customerId: req.params.id

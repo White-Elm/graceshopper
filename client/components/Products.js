@@ -10,7 +10,7 @@ const Products = ({ products }) => {
                     return (
                         <li key={product.id}>
                             <h2>
-                                <Link to={`/products/${product.id}`}> { product.name } </Link>
+                                <Link to={`/products/${product.id}`}> { product.name }, price: { product.cost} </Link>
                             </h2>
                         </li>
                     )

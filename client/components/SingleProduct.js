@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import {connect} from 'react-redux'
 import {Link} from 'react-router-dom';
 import UpdateQty from './UpdateQty';
-
+import UpdateProduct from './UpdateProduct'
 //import SimilarProducts from './SimilarProducts'
 
 
@@ -30,7 +30,8 @@ const SingleProduct = ({products, match: {params: {id} }}) =>{
                 <div>{product.description}</div>
             </div>
             <UpdateQty product={product}/>
-    </div>
+            <UpdateProduct product={product}/>
+        </div>
     )
 }
 
@@ -38,12 +39,6 @@ const SingleProduct = ({products, match: {params: {id} }}) =>{
 const mapStateToProps = (state) =>{
     return state
 }
-// const mapDispatchToProps = (dispatch, {history}) =>{
-//     return{
-//         addToCart: (productid, productQty) =>{
-//             dispatch(addToCart(productid, productQty))
-//         }
-//     }
-// }
+
 export default connect(mapStateToProps)(SingleProduct)
 

@@ -23,6 +23,23 @@ router.get('/:id', async (req, res, next) => {
   }
 });
 
+// PUT /api/products/:id
+
+router.put('/:id', async (req, res, next) => {
+  try {
+    const product = await Product.findByPk(req.params.id);
+    res.send(await product.update({
+      productName: req.body.productName,
+      productDescription : req.body.productDescription,
+      productQty: req.body.productQty,
+      productCost: req.body.productCost,
+    }))
+  }
+  catch (error) {
+    next(error);
+  }
+});
+
 // GET /api/products/productType/:id
 // filter products by type, selecting by productType id
 router.get('/productType/:id', async (req, res, next) => {

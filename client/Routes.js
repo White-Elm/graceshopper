@@ -9,7 +9,7 @@ import Products from './components/Products';
 import { fetchCart } from './store/cart';
 import Cart from './components/Cart';
 import SingleProduct from './components/SingleProduct';
-import {loadProducts, _loadProducts} from './store/index';
+import {loadProducts, _loadProducts} from './store/productsReducer';
 
 /**
  * COMPONENT
@@ -74,7 +74,8 @@ const mapDispatch = dispatch => {
     },
   //check both load products  
     loadProducts: () => dispatch(fetchProducts()),
-    loadCart: () => dispatch(fetchCart())
+    loadCart: () => dispatch(fetchCart()),
+
     _loadProducts : async () =>{
       dispatch(loadProducts())
     }

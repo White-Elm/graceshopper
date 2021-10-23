@@ -20,6 +20,8 @@
   "author": "Fullstack Academy of Code",
   "license": "MIT",
   "dependencies": {
+    "@stripe/react-stripe-js": "^1.6.0",
+    "@stripe/stripe-js": "^1.20.3",
     "axios": "^0.21.1",
     "bcrypt": "^5.0.0",
     "express": "^4.17.1",
@@ -28,8 +30,11 @@
     "morgan": "^1.9.1",
     "path": "^0.12.7",
     "pg": "^8.5.1",
+    "react-stripe-checkout": "^2.6.3",
+    "react-toastify": "^8.0.3",
     "sequelize": "^6.3.5",
-    "stripe": "^8.184.0"
+    "stripe": "^8.184.0",
+    "uuid": "^8.3.2"
   },
   "devDependencies": {
     "@babel/core": "^7.12.10",

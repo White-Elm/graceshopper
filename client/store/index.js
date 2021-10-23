@@ -6,13 +6,15 @@ import auth from './auth'
 import products from './products';
 import cart from './cart';
 import customers from './customers';
-import productReducers from './productsReducer'
+import invoices from './invoices';
+import productReducers from './productsReducer';
 
 const reducer = combineReducers({ 
   auth,
   products,
   cart,
   customers,
+  invoices,
   productReducers,
 })
 
@@ -26,3 +28,4 @@ export * from './auth'
 export * from './products'
 export * from './cart'
 export * from './customers'
+export * from './invoices'

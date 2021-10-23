@@ -1,5 +1,5 @@
 const router = require('express').Router()
-const stripe = require("stripe")("pk_test_4TbuO6qAW2XPuce1Q6ywrGP200NrDZ2233");
+const stripe = require("stripe")("ask Amata for this");
 const uuid = require("uuid");
 module.exports = router
 

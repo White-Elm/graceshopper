@@ -7,7 +7,7 @@ import UpdateProduct from './UpdateProduct'
 
 
 
-const SingleProduct = ({products, match: {params: {id} }}) =>{
+const SingleProduct = ({products, match: {params: {id}} , history}) =>{
     if(products.length === 0){
         return <div>No Product found here :(</div>
     }
@@ -29,8 +29,8 @@ const SingleProduct = ({products, match: {params: {id} }}) =>{
                 <div>{product.cost}</div>
                 <div>{product.description}</div>
             </div>
-            <UpdateQty product={product}/>
-            <UpdateProduct product={product}/>
+            <UpdateQty product={product} history={history}/>
+            <UpdateProduct product={product} history={history}/>
         </div>
     )
 }

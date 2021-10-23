@@ -55,6 +55,7 @@ const Cart = ({ isLoggedIn, userId, cart, customers, destroy }) => {
                     })}
                 </ul>
             )}
+            <Link to='/checkout'> cart </Link>
         </div>
     )
 };

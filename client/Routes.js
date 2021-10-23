@@ -12,7 +12,7 @@ import { fetchCustomer } from './store/customers';
 import Cart from './components/Cart';
 import SingleProduct from './components/SingleProduct';
 import {loadProducts, _loadProducts} from './store/productsReducer';
-
+import SingleCustomer from './components/SingleCustomer';
 
 /**
  * COMPONENT
@@ -36,6 +36,7 @@ class Routes extends Component {
             <Route exact path='/cart' component={ Cart } />
             <Route exact path='/products' component={Products}/>
             <Route path='/products/:id' component={SingleProduct}/>
+            <Route exact path='/customers/:id' component={SingleCustomer}/>
           </Switch>
         </div>
         <div>
@@ -79,7 +80,7 @@ const mapDispatch = dispatch => {
     
     _loadProducts : async () =>{
       dispatch(loadProducts())
-    }
+    },
 
     loadCustomer: () => dispatch(fetchCustomer()),
 

@@ -24,15 +24,14 @@ router.get('/:id', async (req, res, next) => {
 });
 
 // PUT /api/products/:id
-
 router.put('/:id', async (req, res, next) => {
   try {
     const product = await Product.findByPk(req.params.id);
     res.send(await product.update({
-      productName: req.body.productName,
-      productDescription : req.body.productDescription,
-      productQty: req.body.productQty,
-      productCost: req.body.productCost,
+      name: req.body.productName,
+      description : req.body.productDescription,
+      quantity: req.body.productQuantity,
+      cost: req.body.productCost,
     }))
   }
   catch (error) {

@@ -28,6 +28,24 @@ router.get('/customerId/:id', async (req, res, next) => {
     }
   });
 
+
+// GET /api/cart/cartTotal/:id
+// cart total per customer, this is for the checkout page
+router.get('/cartTotal/:id', async (req, res, next) => {
+  try {
+    console.log(Cart);
+    const cart = await Cart.findAll({
+      where: {
+        customerId: req.params.id
+      }
+    })
+    res.send(cart);
+  }
+  catch (error) {
+    next(error);
+  }
+});
+
 // POST /api/cart
 // handles -create new cart item (includes product to cart)
 router.post('/', async (req, res, next) => {

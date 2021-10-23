@@ -6,7 +6,8 @@ import {Link} from 'react-router-dom';
 class UpdateQty extends Component{
     constructor(props){
         super(props);
-        const {product} = this.props;
+        const {customerId, product} = this.props;
+
         this.state = {
             //how does logged in work...?
             customerId : '',
@@ -24,7 +25,7 @@ class UpdateQty extends Component{
         const {productQty, product} = this.state;
         console.log(product.name)
         event.preventDefault();
-        this.props.addToCart(product.name, productQty)
+        this.props.addToCart(customerId, product.name, productQty)
     }
     render(){
         const {product} = this.state;

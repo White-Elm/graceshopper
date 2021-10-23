@@ -51,6 +51,7 @@ router.get('/cartTotal/:id', async (req, res, next) => {
 router.post('/', async (req, res, next) => {
   try {
     res.send(await Cart.create({
+      customerId: req.body.customerId,
       productName: req.body.productName,
       productQty: req.body.productQty,
     }));
@@ -73,17 +74,17 @@ router.delete('/:id', async (req, res, next) => {
     }
   });
 
-// PUT /api/cart/:id
-// handles -update/edit product quantity in cart
-router.put('/:id', async (req, res, next) => {
-    try {
-      const product = await Cart.findByPk(req.params.id);
-      res.send(await product.update(req.body));
-    }
-    catch (error) {
-      next(error);
-    }
-  });
+// // PUT /api/cart/:id
+// // handles -update/edit product quantity in cart
+// router.put('/:id', async (req, res, next) => {
+//     try {
+//       const product = await Cart.findByPk(req.params.id);
+//       res.send(await product.update(req.body));
+//     }
+//     catch (error) {
+//       next(error);
+//     }
+//   });
 
 
 // // GET /api/cart/:id/checkout

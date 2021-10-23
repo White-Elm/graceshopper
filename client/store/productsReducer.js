@@ -33,9 +33,9 @@ const _loadProducts = (products) =>{
     }
 }
 //include userID
-const addToCart = (productName, productQty, history) =>{
+const addToCart = (id, productName, productQty, history) =>{
     return async (dispatch) =>{
-        const product = (await axios.put('/api/cart', {productName, productQty})).data
+        const product = (await axios.put(`/api/cart/${id}`, {productName, productQty})).data
         dispatch(_addToCart(product))
         history.push('/cart')
     }
@@ -50,9 +50,9 @@ const _addToCart = (product) =>{
 
 const updateProduct = (id, productName, productDescription, productQuantity, productCost, history) =>{
     return async (dispatch) =>{
-        const product = (await axios.put(`/api/product/${id}`, {productName, productDescription, productQuantity, productCost})).data
+        const product = (await axios.put(`/api/products/${id}`, {productName, productDescription, productQuantity, productCost})).data
         dispatch(__updateProduct(product))
-        history.push(`/product/${id}`)
+        history.push(`/products/${id}`)
     }
 }
 
@@ -64,4 +64,5 @@ const __updateProduct = (product) =>{
 }
 
 
+export default productReducers;
 export {loadProducts, addToCart, updateProduct}

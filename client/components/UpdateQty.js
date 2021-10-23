@@ -8,7 +8,9 @@ class UpdateQty extends Component{
         super(props);
         const {product} = this.props;
         this.state = {
-            productQty : ' ',
+            //how does logged in work...?
+            customerId : '',
+            productQty : '',
             product: product,
         }
         this.onChange = this.onChange.bind(this)
@@ -23,8 +25,6 @@ class UpdateQty extends Component{
         console.log(product.name)
         event.preventDefault();
         this.props.addToCart(product.name, productQty)
-
-
     }
     render(){
         const {product} = this.state;
@@ -56,8 +56,8 @@ const mapStateToProps = (state) =>{
 
 const mapDispatchToProps = (dispatch, {history}) => {
     return{
-        addToCart: (productName, productQty) =>{
-            dispatch(addToCart(productName, productQty, history))
+        addToCart: (customerId, productName, productQty) =>{
+            dispatch(addToCart(customerId, productName, productQty, history))
         }
     }
 }

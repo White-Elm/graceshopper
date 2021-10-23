@@ -33,9 +33,9 @@ const _loadProducts = (products) =>{
     }
 }
 //include userID
-const addToCart = (id, productName, productQty, history) =>{
+const addToCart = (customerId, productName, productQty, history) =>{
     return async (dispatch) =>{
-        const product = (await axios.put(`/api/cart/${id}`, {productName, productQty})).data
+        const product = (await axios.post(`/api/cart`, {customerId ,productName, productQty})).data
         dispatch(_addToCart(product))
         history.push('/cart')
     }

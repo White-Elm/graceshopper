@@ -41,7 +41,7 @@ const Payment = ({ cart }) => {
             </ul>
             <h3> Cart Total: {cartTotal} </h3>
             <StripeCheckout
-        stripeKey="pk_test_4TbuO6qAW2XPuce1Q6ywrGP200NrDZ2233"
+        stripeKey="remove skey"
         amount={cartTotal * 100}
         name= "Checkout"
         token={handleToken}

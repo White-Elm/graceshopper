@@ -10,7 +10,10 @@ import Products from './components/Products';
 import { fetchCart } from './store/cart';
 import { fetchCustomer } from './store/customers';
 import Cart from './components/Cart';
+import Checkout from './components/Checkout';
 import SingleProduct from './components/SingleProduct';
+import SuccessfulOrder from './components/Stripe Integration/Success';
+import Payment from './components/Stripe Integration/Payment';
 import {loadProducts, _loadProducts} from './store/productsReducer';
 import SingleCustomer from './components/SingleCustomer';
 
@@ -34,9 +37,21 @@ class Routes extends Component {
         <div>
           <Switch>
             <Route exact path='/cart' component={ Cart } />
+
+            <Route exact path='/' component={ Login } />
+            <Route path="/login" component={Login} /> 
+            // ^ this is causing the double login page, do we want to remove this and leave the login on the home page?
+            <Route path="/signup" component={Signup} />
+            // ^ this is alternatively causing the double signup page
+            <Route exact path='/products' component={Products}/>
+            <Route exact path='/products/:id' component={SingleProduct}/>
+            <Route exact path='/success' component={SuccessfulOrder}/>
+            <Route exact path='/checkout' component={Payment}/>
             <Route exact path='/products' component={Products}/>
             <Route path='/products/:id' component={SingleProduct}/>
             <Route exact path='/customers/:id' component={SingleCustomer}/>
+            <Route path='/checkout' component={Checkout}/>
+
           </Switch>
         </div>
         <div>
@@ -77,7 +92,7 @@ const mapDispatch = dispatch => {
   //check both load products  
     loadProducts: () => dispatch(fetchProducts()),
     loadCart: () => dispatch(fetchCart()),
-    
+
     _loadProducts : async () =>{
       dispatch(loadProducts())
     },

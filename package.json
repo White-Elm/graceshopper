@@ -31,10 +31,8 @@
     "path": "^0.12.7",
     "pg": "^8.5.1",
     "sequelize": "^6.3.5",
-    "stripe": "^8.184.0"
-    "react-stripe-checkout": "^2.6.3",
-    "sequelize": "^6.3.5",
     "stripe": "^8.184.0",
+    "react-stripe-checkout": "^2.6.3"
   },
   "devDependencies": {
     "@babel/core": "^7.12.10",

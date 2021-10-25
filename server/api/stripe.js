@@ -5,7 +5,7 @@ const path = require('path');
 const domain = 'http://localhost:8080'
 
 //static files
-app.use(express.static(path.join(_dirname,"views")));
+// app.use(express.static(path.join(_dirname,"views")));
 
 //middleware
 app.use(express.json());

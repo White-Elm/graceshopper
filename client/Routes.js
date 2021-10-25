@@ -12,7 +12,7 @@ import { fetchCustomer } from './store/customers';
 import Cart from './components/Cart';
 import Checkout from './components/Checkout';
 import SingleProduct from './components/SingleProduct';
-import SuccessfulOrder from './components/Stripe Integration/Success';
+// import SuccessfulOrder from './components/Stripe Integration/Success';
 import {loadProducts, _loadProducts} from './store/productsReducer';
 import Payment from './components/Payment';
 import SingleCustomer from './components/SingleCustomer';
@@ -37,18 +37,16 @@ class Routes extends Component {
         <div>
           <Switch>
             <Route exact path='/cart' component={ Cart } />
-
             <Route exact path='/' component={ Login } />
-            <Route path="/login" component={Login} /> 
+            {/* <Route path="/login" component={Login} /> 
             <Route path="/signup" component={Signup} />
             <Route exact path='/products' component={Products}/>
             <Route exact path='/products/:id' component={SingleProduct}/>
-            <Route exact path='/checkout' component={Payment}/>
+            <Route exact path='/checkout' component={Payment}/> */}
             <Route exact path='/products' component={Products}/>
             <Route path='/products/:id' component={SingleProduct}/>
             <Route exact path='/customers/:id' component={SingleCustomer}/>
             <Route path='/checkout' component={Checkout}/>
-
           </Switch>
         </div>
         <div>

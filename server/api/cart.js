@@ -53,6 +53,12 @@ router.post('/', async (req, res, next) => {
     res.send(await Cart.create({
       productName: req.body.productName,
       productQty: req.body.productQty,
+      //
+      // debug: I'm passing in add'l product properties to our DB (later these are used in the cart & checkout component)
+      productTotal: req.body.productTotal,
+      cartTotal: req.body.cartTotal,
+      // customerId: req.body.customerId,
+      productId: req.body.productId,
     }));
   }
   catch (error) {

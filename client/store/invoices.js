@@ -2,7 +2,6 @@ import axios from 'axios';
 
 const LOAD_INVOICE = 'LOAD_INVOICE';
 const ADD_INVOICE = 'ADD_INVOICE';
-const SET_FINAL_CART = 'SET_FINAL_CART'
 const DELETE_CART = 'DELETE_CART'
 
 
@@ -20,15 +19,17 @@ const invoiceReducers = (state = [], action) =>{
   }
 
 // actions
-const _loadInvoice = () => { 
+const _loadInvoice = (invoice) => { 
     return {
         type: LOAD_INVOICE,
+        invoice,
     };
 };
 
-const _deleteCart = () => { 
+const _deleteCart = (cart) => { 
     return {
         type: DELETE_CART,
+        cart,
     };
 };
 
@@ -36,7 +37,7 @@ const _deleteCart = () => {
 // thunk
 export const fetchInvoice = () => {
     return async (dispatch) => {
-        const invoice = await axios.get('/api/invoice');
+        const { data: invoice } = await axios.get('/api/invoice');
         dispatch(_loadInvoice(invoice));
     };
 };

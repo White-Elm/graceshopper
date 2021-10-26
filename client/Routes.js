@@ -4,7 +4,6 @@ import {withRouter, Route, Switch, Redirect } from 'react-router-dom'
 import { Login, Signup } from './components/AuthForm';
 import Home from './components/Home';
 import {me} from './store'
-
 import { fetchProducts } from './store/products';
 import Products from './components/Products';
 import { fetchCart } from './store/cart';
@@ -12,10 +11,13 @@ import { fetchCustomer } from './store/customers';
 import Cart from './components/Cart';
 import Checkout from './components/Checkout';
 import SingleProduct from './components/SingleProduct';
-import Payment from './components/Stripe Integration/Payment';
 import {loadProducts, _loadProducts} from './store/productsReducer';
-import Payment from './components/Payment';
+// import Payment from './components/Payment';
 import SingleCustomer from './components/SingleCustomer';
+import AdminHome from './components/Admin/AdminHome';
+import AdminProducts from './components/Admin/AdminProducts';
+import AdminSingleProduct from './components/Admin/AdminSingleProduct';
+import AdminCustomers from './components/Admin/AdminCustomers'
 
 /**
  * COMPONENT
@@ -38,21 +40,21 @@ class Routes extends Component {
           <Switch>
             <Route exact path='/cart' component={ Cart } />
             <Route exact path='/' component={ Login } />
-            {/* <Route path="/login" component={Login} /> 
-            <Route path="/signup" component={Signup} />
-            <Route exact path='/products' component={Products}/>
-            <Route exact path='/products/:id' component={SingleProduct}/>
-            <Route exact path='/checkout' component={Payment}/> */}
+            <Route path='/checkout' component={Checkout}/>
+            <Route exact path='/Admin' component={AdminHome}/>
+            <Route exact path='/admin/products' component={AdminProducts}/>
+            <Route exact path='/admin/products/:id' component={AdminSingleProduct}/>
+            <Route exact path='/Admin/Customers' component={AdminCustomers}/>
+            <Route exact path='/Admin/customers/:id' component={SingleCustomer}/>
             <Route exact path='/products' component={Products}/>
             <Route path='/products/:id' component={SingleProduct}/>
             <Route exact path='/payment' component={Payment}/>
             <Route exact path='/customers/:id' component={SingleCustomer}/>
-            <Route path='/checkout' component={Checkout}/>
           </Switch>
         </div>
         <div>
           {isLoggedIn ? (
-            <Fragment>
+            <Fragment>ß
               <Route path="/home" exact component={Home} />
               <Redirect to="/home" />
             </Fragment>

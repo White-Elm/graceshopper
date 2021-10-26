@@ -5,6 +5,7 @@ const LOAD_PRODUCTS = 'LOAD_PRODUCTS';
 const ADD_TO_CART = 'ADD_TO_CART';
 const UPDATE_PRODUCT = 'UPDATE_PRODUCT';
 
+
 const productReducers = (state = [], action) =>{
   if(action.type === LOAD_PRODUCTS){
     state = action.products;
@@ -32,6 +33,9 @@ const _loadProducts = (products) =>{
         products,
     }
 }
+
+
+
 //include userID
 const addToCart = (customerId, productName, productQty, history) =>{
     return async (dispatch) =>{

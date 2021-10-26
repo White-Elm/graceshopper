@@ -30,3 +30,15 @@ router.put('/:id', async (req, res, next) => {
     next(error);
   }
 });
+
+// PUT /api/customers
+
+router.post('/', async(req, res, next)=> {
+  try {
+    const customer = await Customer.create(req.params.id);
+    res.status(201).send(await Customer.create(req.body));
+  }
+  catch(ex){
+    next(ex);
+  }
+});

@@ -29,4 +29,13 @@ router.get('/customerId/:id', async (req, res, next) => {
     }
   });
 
-
+// POST /api/invoice/customerId/:id
+// add invoice after an order is complete
+  router.post('/', async (req, res, next) => {
+    try {
+      const invoice = await Invoice.create(req.body);
+      res.send(invoice);
+   } catch (err) {
+      next(err)
+  }
+});

@@ -32,10 +32,9 @@ const _loadProducts = (products) =>{
         products,
     }
 }
-//include userID
-const addToCart = (customerId, productName, productQty, history) =>{
+const addToCart = (cart, history) =>{ // debug: I changed the first variable to 'cart' (which is basically all variables combined) bc now I'm passing add'l product variables
     return async (dispatch) =>{
-        const product = (await axios.post(`/api/cart`, {customerId ,productName, productQty})).data
+        const product = (await axios.post('/api/cart', cart )).data; // debug: I changed this to post - I think bc 'cart' in our DB is actually a cartItem, we'll be including add'l cartItems with the updateQty functionality
         dispatch(_addToCart(product))
         history.push('/cart')
     }

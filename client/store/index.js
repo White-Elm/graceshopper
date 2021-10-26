@@ -8,6 +8,8 @@ import cart from './cart';
 import customers from './customers';
 import invoices from './invoices';
 import productReducers from './productsReducer';
+import roomsReducers from './roomsReducer';
+import typesReducers from './typesReducer';
 
 const reducer = combineReducers({ 
   auth,
@@ -16,6 +18,8 @@ const reducer = combineReducers({
   customers,
   invoices,
   productReducers,
+  rooms: roomsReducers,
+  types : typesReducers,
 })
 
 const middleware = composeWithDevTools(

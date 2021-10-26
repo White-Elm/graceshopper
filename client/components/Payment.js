@@ -4,10 +4,10 @@ import {connect} from 'react-redux';
 import axios from "axios";
 import { addInvoice, deleteCart } from "../store";
 
-//move api key to env file 
-const Payment = props => {
-  const { cart, handleSubmit } = props;
+const stripeSK = process.env.REACT_APP_STRIPE_SK;
 
+const Payment = ( { cart }) => {
+  
   let cartTotal =0;
   cart.map((product) => {
     let productTotal = parseInt(product.productTotal)  
@@ -16,7 +16,7 @@ const Payment = props => {
     
    async function handleToken(token, addresses) {
     const response = await axios.post(
-      "http://localhost:8080/api/stripe",
+      process.env.REACT_APP_STRIPE_RESPONSE,
       { token, cart }
     );
 
@@ -37,8 +37,8 @@ const Payment = props => {
                 })}
             </ul>
             <h3> Cart Total: {cartTotal} </h3>
-            <StripeCheckout onSubmit = {handleSubmit}
-        stripeKey="remove skey"
+            <StripeCheckout onClick={() => destroy(cart.customerId)}
+        stripeKey= {stripeSK}
         amount={cartTotal * 100}
         name= "Checkout"
         token={handleToken}
@@ -51,14 +51,13 @@ const Payment = props => {
 
 const mapStateToProps = ({ cart }) => ({ cart });
 
-const mapDispatch = dispatch => {
-  return {
-    handleSubmit(evt) {
-      evt.preventDefault()
-      dispatch(addInvoice);
-      dispatch(deleteCart);
-    }
-  }
-}
+const mapDispatchToProps = (dispatch) => {
+  return{
+      destroy: (cart) => {
+          dispatch(addInvoice())
+          dispatch(deleteCart(cart));
+      }
+  };
+};
 
-export default connect(mapStateToProps, mapDispatch)(Payment)
+export default connect(mapStateToProps, mapDispatchToProps)(Payment)

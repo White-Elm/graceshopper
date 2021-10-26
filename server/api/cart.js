@@ -80,6 +80,20 @@ router.delete('/:id', async (req, res, next) => {
     }
   });
 
+// DELETE /api/cart/:id
+// handles -delete product from cart
+router.delete('/:customerId', async (req, res, next) => {
+  try {
+    const cart = await Cart.findByPk(req.params.customerId);
+    await cart.destroy();
+    res.send(cart);
+  }
+  catch (error) {
+    next(error);
+  }
+});
+
+
 // // PUT /api/cart/:id
 // // handles -update/edit product quantity in cart
 // router.put('/:id', async (req, res, next) => {

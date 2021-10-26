@@ -10,12 +10,11 @@ const invoiceReducers = (state = [], action) =>{
     if(action.type === LOAD_INVOICE){
       state = action.invoice;
     }
-    if(action.type === SET_FINAL_CART){
-        state = action.cart;
-
-    }
     if(action.type === ADD_INVOICE){
         state = [...state, action.invoice]
+    }
+    if(action.type === DELETE_CART){
+        return state.filter(cart => cart.customerId !== action.cart.customerId);
     }
     return state;
   }
@@ -24,16 +23,15 @@ const invoiceReducers = (state = [], action) =>{
 const _loadInvoice = () => { 
     return {
         type: LOAD_INVOICE,
-        cart,
     };
 };
 
-const _setFinalCart = () => { 
+const _deleteCart = () => { 
     return {
-        type: SET_FINAL_CART,
-        cart,
+        type: DELETE_CART,
     };
 };
+
 
 // thunk
 export const fetchInvoice = () => {
@@ -43,14 +41,7 @@ export const fetchInvoice = () => {
     };
 };
 
-export const finalCart = () =>{
-    return async(dispatch) => {
-        const finalCart = await axios.get('/api/cart/customerId/:id');
-        dispatch(_setFinalCart(finalCart.data));
-    }
-}
-
-export const addInvoice = (cart) => {
+export const addInvoice = () => {
     return async (dispatch) => {
         const invoice = await axios.post('/api/invoice');
         window.localStorage.setItem(invoice)
@@ -58,5 +49,12 @@ export const addInvoice = (cart) => {
     };
 };
 
+export const deleteCart = (customerId) => {
+    console.log(id)
+    return async (dispatch) => {
+        await axios.delete(`/api/cart/${customerId}`);
+        dispatch(_deleteCart({ id: id * 1 }));
+    };
+};
 
 export default invoiceReducers;

@@ -6,7 +6,8 @@ import {Link} from 'react-router-dom';
 class UpdateQty extends Component{
     constructor(props){
         super(props);
-        const {product} = this.props;
+        const {customerId, product} = this.props;
+
         this.state = {
             //how does logged in work...?
             customerId : this.props.userId, //  debug: includes 'id' for signed in user; if user is not signed in, userId comes back as an empty string

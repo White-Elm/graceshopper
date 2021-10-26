@@ -33,6 +33,7 @@ const AuthForm = props => {
 }
 
 /**
+
  * CONTAINER
  *   Note that we have two different sets of 'mapStateToProps' functions -
  *   one for Login, and one for Signup. However, they share the same 'mapDispatchToProps'

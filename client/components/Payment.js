@@ -2,9 +2,12 @@ import React from "react";
 import StripeCheckout from "react-stripe-checkout";
 import {connect} from 'react-redux';
 import axios from "axios";
+import { addInvoice, deleteCart } from "../store";
 
 //move api key to env file 
-const Payment = ({ cart }) => {
+const Payment = props => {
+  const { cart, handleSubmit } = props;
+
   let cartTotal =0;
   cart.map((product) => {
     let productTotal = parseInt(product.productTotal)  
@@ -16,13 +19,7 @@ const Payment = ({ cart }) => {
       "http://localhost:8080/api/stripe",
       { token, cart }
     );
-    const { status } = response.data;
-    console.log("Response:", response.data);
-    if (status === "success") {
-      console.log('go to success page!')
-    } else {
-      console.log('go to failure page!')
-    }
+
   }
     return (
         <div>
@@ -40,7 +37,7 @@ const Payment = ({ cart }) => {
                 })}
             </ul>
             <h3> Cart Total: {cartTotal} </h3>
-            <StripeCheckout
+            <StripeCheckout onSubmit = {handleSubmit}
         stripeKey="remove skey"
         amount={cartTotal * 100}
         name= "Checkout"
@@ -54,4 +51,14 @@ const Payment = ({ cart }) => {
 
 const mapStateToProps = ({ cart }) => ({ cart });
 
-export default connect(mapStateToProps)(Payment)
+const mapDispatch = dispatch => {
+  return {
+    handleSubmit(evt) {
+      evt.preventDefault()
+      dispatch(addInvoice);
+      dispatch(deleteCart);
+    }
+  }
+}
+
+export default connect(mapStateToProps, mapDispatch)(Payment)

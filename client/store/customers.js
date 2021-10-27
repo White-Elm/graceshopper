@@ -52,8 +52,6 @@ const updateCustomer = (id, firstName, lastName, address, history) =>{
 }
 
 
-
-
 // reducer
 // export default (state = [], action) => {
 //     switch (action.type) {

@@ -4,19 +4,7 @@ import {connect} from 'react-redux';
 import axios from "axios";
 import { addInvoice, deleteCart } from "../store";
 
-
-const mapStateToProps = ({ cart }) => ({ cart });
-const mapDispatchToProps = (dispatch) => {
-  return{
-    destroy: (cart) => {
-      dispatch(addInvoice())
-      dispatch(deleteCart(cart));
-    }
-  };
-};
-
-const Payment = ( { cart }) => {
-  
+const Payment = ( { cart, destroy }) => {
   const stripePK = process.env.REACT_APP_STRIPE_PK;
   console.log(stripePK);
 
@@ -31,7 +19,15 @@ const Payment = ( { cart }) => {
       process.env.REACT_APP_STRIPE_RESPONSE,
       { token, cart }
     );
+
+    var event = new CustomEvent("event", { "detail": "waiting for stripe response" });
+    document.dispatchEvent(event);
   }
+
+  document.addEventListener("event", function(){
+    console.log('hello from the othersiiiiide')
+    destroy(cart.id,cart.productName,cart.productQty,cart.productTotal,cart.invoiceTotal,cart.createdAt , cart.updatedAt ,cart.productId,cart.customerId)
+  })
 
     return (
         <div>
@@ -61,6 +57,15 @@ const Payment = ( { cart }) => {
     )
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(Payment)
+const mapStateToProps = ({ cart }) => ({ cart });
 
+const mapDispatchToProps = (dispatch, {history}) => {
+  return{
+    destroy: (id,productName,productQty,productTotal,invoiceTotal,createdAt , updatedAt ,productId,customerId) => {
+      //dispatch(addInvoice(id,productName,productQty,productTotal,invoiceTotal,createdAt , updatedAt ,productId,customerId,history));
+      dispatch(deleteCart(id,productName,productQty,productTotal,invoiceTotal,createdAt , updatedAt ,productId,customerId));
+    }
+};
+}
 
+export default connect(mapStateToProps, mapDispatchToProps)(Payment) 

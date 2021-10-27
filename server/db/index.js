@@ -37,6 +37,9 @@ ProductType.hasMany(Product);
 Product.belongsTo(Room);
 Room.hasMany(Product);
 
+
+
+
 module.exports = {
   db,
   models: {

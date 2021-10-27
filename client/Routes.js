@@ -21,6 +21,8 @@ import AdminProducts from './components/Admin/AdminProducts';
 import AdminSingleProduct from './components/Admin/AdminSingleProduct';
 import AdminCustomers from './components/Admin/AdminCustomers'
 import AddCustomerInfo from './components/AddCustomerInfo'
+import { fetchAdmin } from './store/admins';
+import TestingPayment from './components/scratch';
 
 
 
@@ -30,16 +32,18 @@ import AddCustomerInfo from './components/AddCustomerInfo'
 class Routes extends Component {
   componentDidMount() {
     this.props.loadInitialData();
-    // this.props._loadProducts()
     this.props.loadProducts();
     this.props.loadCart();
     this.props.loadCustomer();
+    this.props.loadAdmin();
     this.props._loadRooms();
     this.props._loadTypes();
   }
 
   render() {
     const {isLoggedIn} = this.props
+    //I added a loadAdmins prop, so we can check if the person's userId matches the one from the admins table 
+    //to display a different navbar
 
     return (
       <div>
@@ -98,9 +102,9 @@ const mapDispatch = dispatch => {
     loadInitialData() {
       dispatch(me())
     },
+    loadProducts: () => dispatch(fetchProducts()),
   //check both load products  
     loadProducts: () => dispatch(fetchProducts()),
-    loadCart: () => dispatch(fetchCart()),
 
     _loadProducts : async () =>{
       dispatch(loadProducts())
@@ -113,6 +117,11 @@ const mapDispatch = dispatch => {
     },
 
     loadCustomer: () => dispatch(fetchCustomer()),
+
+    loadAdmin: () => dispatch(fetchAdmin()),
+    loadCart: () => dispatch(fetchCart()),
+
+
 
   }
 }

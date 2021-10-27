@@ -5,7 +5,6 @@ const LOAD_PRODUCTS = 'LOAD_PRODUCTS';
 const ADD_TO_CART = 'ADD_TO_CART';
 const UPDATE_PRODUCT = 'UPDATE_PRODUCT';
 
-
 const productReducers = (state = [], action) =>{
   if(action.type === LOAD_PRODUCTS){
     state = action.products;
@@ -17,6 +16,7 @@ const productReducers = (state = [], action) =>{
   if(action.type === UPDATE_PRODUCT){
       state = state.map(product => product.id !== action.product.id ? product : action.product)
   }
+
   return state;
 }
 
@@ -36,7 +36,7 @@ const _loadProducts = (products) =>{
 
 const addToCart = (cart, history) =>{ // debug: I changed the first variable to 'cart' (which is basically all variables combined) bc now I'm passing add'l product variables
     return async (dispatch) =>{
-        const product = (await axios.post('/api/cart', cart )).data; // debug: I changed this to post - I think bc 'cart' in our DB is actually a cartItem, we'll be including add'l cartItems with the updateQty functionality
+        const product = (await axios.post('/api/cart', cart )).data; 
         dispatch(_addToCart(product))
         history.push('/cart')
     }
@@ -63,7 +63,6 @@ const __updateProduct = (product) =>{
         product
     }
 }
-
 
 export default productReducers;
 export {loadProducts, addToCart, updateProduct}

@@ -1,6 +1,6 @@
 const router = require('express').Router()
 const { models: {User }} = require('../db')
-const { models: {Customer }} = require('../db')
+const { models: {Customer , Cart }} = require('../db')
 module.exports = router
 
 router.post('/login', async (req, res, next) => {
@@ -17,10 +17,17 @@ router.post('/signup', async (req, res, next) => {
       username: req.body.username,
       password: req.body.password,
       customers:{
-        userId: req.body.id,
-      }}
-    ,{
-      include:[Customer]
+        id : req.body.id,
+      },
+      carts:{
+        customerId: req.body.id,
+      },
+    },
+    {
+      include:[
+        {model:Customer},
+        {model: Cart}
+      ]
     }
  );
   res.send({token: await user.generateToken()})
@@ -40,3 +47,5 @@ router.get('/me', async (req, res, next) => {
     next(ex)
   }
 })
+
+router.get('/')

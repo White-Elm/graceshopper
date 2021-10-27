@@ -1,40 +1,38 @@
-import React from "react";
+import {React, Component} from "react";
 import StripeCheckout from "react-stripe-checkout";
 import {connect} from 'react-redux';
 import axios from "axios";
 import { addInvoice, deleteCart } from "../store";
 
-const Payment = ( { cart, destroy}) => {
+
+class TestingPayment extends Component{
+    constructor(props){
+        super(props);
+        const {cart} = this.props;
+        console.log('props cart',cart)
+        this.state = {
+            cart: cart,
+        }
+    }
+    render(){
   const stripePK = process.env.REACT_APP_STRIPE_PK;
 
+console.log(cart)
   const cartTotal = cart.length ? cart.reduce((sum, cartItem) => sum + cartItem.cartTotal*1, cart[0].cartTotal*1) : 0;
-
+      
    async function handleToken(token, addresses) {
     const response = await axios.post(
       process.env.REACT_APP_STRIPE_RESPONSE,
       { token, cart }
     );
-    if (cart.length >= 1){
-      console.log(cart)
-      var event = new CustomEvent("event", { "detail": "waiting for stripe response" });
-      document.dispatchEvent(event);
-    }
+
+    var event = new CustomEvent("event", { "detail": "waiting for stripe response" });
+    document.dispatchEvent(event);
   }
+
   document.addEventListener("event", function(){
-    const invoice = {
-            productName: cart[0].productName,
-            productQty: cart[0].productQty,
-            productTotal: cart[0].productTotal,
-            invoiceTotal: cart[0].productQty*cart.cartTotal,
-            customerId: cart[0].customerId,
-            productId: cart[0].productId,
-            userId: cart[0].userId,
-    }
-
-    console.log('this is the invoice', invoice);
-    console.log('this is the invoice', cart);
-
-    destroy(invoice)
+    console.log('hello from the othersiiiiide')
+    this.props.destroy(cart.id,cart.productName,cart.productQty,cart.productTotal,cart.invoiceTotal,cart.createdAt , cart.updatedAt ,cart.productId,cart.customerId)
   })
 
     return (
@@ -63,17 +61,18 @@ const Payment = ( { cart, destroy}) => {
       />
         </div>
     )
+            }
 };
 
 const mapStateToProps = ({ cart }) => ({ cart });
 
 const mapDispatchToProps = (dispatch, {history}) => {
   return{
-    destroy: (invoice) => {
-      dispatch(addInvoice(invoice, history));
-      dispatch(deleteCart(invoice.userId));
+    destroy: (id,productName,productQty,productTotal,invoiceTotal,createdAt , updatedAt ,productId,customerId) => {
+      //dispatch(addInvoice(id,productName,productQty,productTotal,invoiceTotal,createdAt , updatedAt ,productId,customerId,history));
+      dispatch(deleteCart(id,productName,productQty,productTotal,invoiceTotal,createdAt , updatedAt ,productId,customerId));
     }
 };
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(Payment) 
+export default connect(mapStateToProps, mapDispatchToProps)(TestingPayment) 

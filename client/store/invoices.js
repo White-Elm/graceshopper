@@ -33,6 +33,13 @@ const _deleteCart = (cart) => {
     };
 };
 
+const _addInvoice = (cart) => { 
+    return {
+        type: ADD_INVOICE,
+        cart,
+    };
+};
+
 
 // thunk
 export const fetchInvoice = () => {
@@ -42,19 +49,18 @@ export const fetchInvoice = () => {
     };
 };
 
-export const addInvoice = () => {
+export const addInvoice = (id,productName,productQty,productTotal,invoiceTotal,createdAt , updatedAt ,productId,customerId,history) => {
     return async (dispatch) => {
-        const invoice = await axios.post('/api/invoice');
-        window.localStorage.setItem(invoice)
-        dispatch(finalCart());
+        const invoice = await axios.post(`/api/invoices/${customerId}`,{ id,productName,productQty,productTotal,invoiceTotal,createdAt , updatedAt ,productId,customerId}).data;
+        dispatch(_addInvoice(invoice));
+        history.push(`/invoices/${customerId}`)
     };
 };
 
 export const deleteCart = (customerId) => {
-    console.log(id)
     return async (dispatch) => {
         await axios.delete(`/api/cart/${customerId}`);
-        dispatch(_deleteCart({ id: id * 1 }));
+        dispatch(_deleteCart({ customerId: customerId * 1 }));
     };
 };
 

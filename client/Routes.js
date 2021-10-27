@@ -15,12 +15,14 @@ import {loadProducts, _loadProducts} from './store/productsReducer';
 import Payment from './components/Payment';
 import {loadRooms} from './store/roomsReducer';
 import {loadTypes} from './store/typesReducer';
-// import Payment from './components/Payment';
 import SingleCustomer from './components/SingleCustomer';
 import AdminHome from './components/Admin/AdminHome';
 import AdminProducts from './components/Admin/AdminProducts';
 import AdminSingleProduct from './components/Admin/AdminSingleProduct';
 import AdminCustomers from './components/Admin/AdminCustomers'
+import AddCustomerInfo from './components/AddCustomerInfo'
+
+
 
 /**
  * COMPONENT
@@ -48,7 +50,6 @@ class Routes extends Component {
             <Route exact path='/products' component={Products}/>
             <Route exact path='/products/:id' component={SingleProduct}/>
             <Route exact path='/products/Sort/:by?' component={Products} />
-            {/* {<Route exact path='/payment' component={Payment}/>} */}
             <Route path='/checkout' component={Checkout}/>
             <Route exact path='/Admin' component={AdminHome}/>
             <Route exact path='/admin/products' component={AdminProducts}/>
@@ -59,6 +60,8 @@ class Routes extends Component {
             <Route path='/products/:id' component={SingleProduct}/>
             <Route exact path='/payment' component={Payment}/>
             <Route exact path='/customers/:id' component={SingleCustomer}/>
+            <Route exact path='/customerprofile' component={AddCustomerInfo}/>
+
           </Switch>
         </div>
         <div>

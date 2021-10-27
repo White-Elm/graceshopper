@@ -63,9 +63,9 @@ class Routes extends Component {
         </div>
         <div>
           {isLoggedIn ? (
-            <Fragment>ß
+            <Fragment>
               <Route path="/home" exact component={Home} />
-              <Redirect to="/home" />
+              {/* <Redirect to="/home" /> */}
             </Fragment>
           ) : (
             <Switch>

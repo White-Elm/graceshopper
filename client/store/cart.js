@@ -27,7 +27,6 @@ export const fetchCart = () => {
 };
 
 export const destroyCartItem = (id) => {
-    console.log(id)
     return async (dispatch) => {
         await axios.delete(`/api/cart/${id}`);
         dispatch(_destroyCartItem({ id: id * 1 }));

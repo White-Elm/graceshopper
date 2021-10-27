@@ -7,10 +7,10 @@ class UpdateQty extends Component{
     constructor(props){
         super(props);
         const {customerId, product} = this.props;
-
+        // customer: state.customers.filter( customer => customer.userId === state.auth.id),
         this.state = {
             //how does logged in work...?
-            customerId : this.props.userId, //  debug: includes 'id' for signed in user; if user is not signed in, userId comes back as an empty string
+            // customerId : this.props.customer[0], //  debug: includes 'id' for signed in user; if user is not signed in, userId comes back as an empty string
             productQty : '',
             product: product,
         }
@@ -37,7 +37,6 @@ class UpdateQty extends Component{
     }
     render(){
         const {product} = this.state;
-        console.log(product)
         const stockArr = [];
         for(let i = 0; i<=product.quantity; i++){ // debug: I changed 'i' to start from zero bc it was not allowing user to add 1 single item (it showed in the drop down list, but was passed as empty to the store) 
             stockArr.push(i)
@@ -47,7 +46,6 @@ class UpdateQty extends Component{
         return(
             <form onSubmit={onSubmit}>
                 <select value={productQty} name='productQty' onChange = {onChange}>
-                    {console.log(productQty)}
                     {stockArr.map(stock =>{
                         return(
                         <option key = {stock} value={stock} onChange = {onChange}>
@@ -62,10 +60,13 @@ class UpdateQty extends Component{
 }
 
 const mapStateToProps = (state) =>{
+    console.log('in mapStateToProps, this is my state')
+    console.log(state)
     return { 
         state,
         isLoggedIn: !!state.auth.id, // debug: checks if user is signed in (returns true or false)
         userId: state.auth.id, // debug: if is signed in user, gets its userId; if user is not signed in, userId comes back as an empty string
+        customers: state.customers
     };
 }
 

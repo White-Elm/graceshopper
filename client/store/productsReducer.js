@@ -7,11 +7,11 @@ const UPDATE_PRODUCT = 'UPDATE_PRODUCT';
 
 const productReducers = (state = [], action) =>{
   if(action.type === LOAD_PRODUCTS){
-    state = action.products;
+      state = action.products;
   }
   if(action.type === ADD_TO_CART){
-      //not sure here...
-      state = [...state, action.product]
+    //   state = [...state, action.product]
+    state.push(action.product);
   }
   if(action.type === UPDATE_PRODUCT){
       state = state.map(product => product.id !== action.product.id ? product : action.product)
@@ -36,9 +36,21 @@ const _loadProducts = (products) =>{
 
 const addToCart = (cart, history) =>{ // debug: I changed the first variable to 'cart' (which is basically all variables combined) bc now I'm passing add'l product variables
     return async (dispatch) =>{
-        const product = (await axios.post('/api/cart', cart )).data; 
-        dispatch(_addToCart(product))
-        history.push('/cart')
+      
+        const previousCart = (await axios.get('/api/cart')).data.filter(custCart => custCart.customerId === cart.customerId && custCart.productId === cart.productId);
+
+        if (previousCart.length) {
+            cart.productQty = cart.productQty*1 + previousCart[0].productQty*1;
+            cart.cartTotal = cart.productQty * cart.productTotal;
+
+            const product = (await axios.put(`/api/cart/${previousCart[0].id}`, cart)).data;
+            dispatch(_addToCart(product))
+            history.push('/cart')
+        } else {
+            const product = (await axios.post('/api/cart', cart )).data; // debug: I changed this to post - I think bc 'cart' in our DB is actually a cartItem, we'll be including add'l cartItems with the updateQty functionality
+            dispatch(_addToCart(product))
+            history.push('/cart')
+        }
     }
 }
 

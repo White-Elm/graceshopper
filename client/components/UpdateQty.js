@@ -5,11 +5,12 @@ import {addToCart} from '../store/productsReducer';
 class UpdateQty extends Component{
     constructor(props){
         super(props);
-        const {userId, product} = this.props;
+        const {userId, customer, product} = this.props;
 
         this.state = {
             id: '',
             //how does logged in work...?
+            customerId: customer.length ? customer[0].id : null,
             userId : userId, //  debug: includes 'id' for signed in user; if user is not signed in, userId comes back as an empty string
             productQty : '',
             product: product,
@@ -35,22 +36,21 @@ class UpdateQty extends Component{
             productId: product.id,
             userId: userId,
         };
-        console.log("this is the user Id",cart.userId)
-        this.props.addToCart(cart,userId);
+
+        this.props.addToCart(cart);
     }
     render(){
         const {product} = this.state;
-        console.log(product)
         const stockArr = [];
         for(let i = 0; i<=product.quantity; i++){ // debug: I changed 'i' to start from zero bc it was not allowing user to add 1 single item (it showed in the drop down list, but was passed as empty to the store) 
             stockArr.push(i)
         }
-        const {productQty} = this.state;
-        const {onChange, onSubmit} = this
+        const { productQty } = this.state;
+        const {onChange, onSubmit} = this;
+
         return(
             <form onSubmit={onSubmit}>
                 <select value={productQty} name='productQty' onChange = {onChange}>
-                    {console.log(productQty)}
                     {stockArr.map(stock =>{
                         return(
                         <option key = {stock} value={stock} onChange = {onChange}>
@@ -69,6 +69,7 @@ const mapStateToProps = (state) =>{
         state,
         isLoggedIn: !!state.auth.id, // debug: checks if user is signed in (returns true or false)
         userId: state.auth.id, // debug: if is signed in user, gets its userId; if user is not signed in, userId comes back as an empty string
+        customer: state.customers.filter( customer => customer.userId === state.auth.id),
     };
 }
 

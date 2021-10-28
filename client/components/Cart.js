@@ -5,9 +5,9 @@ import { destroyCartItem} from '../store/cart';
 
 
 const Cart = ({ isLoggedIn, userId, cart, customers, destroy }) => {
-    const customer = customers.filter( user => user.id === userId );
+    const customer = customers.filter( user => user.userId === userId );
     const customerId = isLoggedIn && customer.length ? customer[0].id : null;
-    const hasCart = cart.filter(cartItem => cartItem.customerId == customerId);
+    const hasCart = cart.filter(item => item.customerId === customerId);
 
     return (
         <div>
@@ -20,13 +20,13 @@ const Cart = ({ isLoggedIn, userId, cart, customers, destroy }) => {
                                     Product Name: { cartItem.productName }
                                 </h2>
                                 <h2>
-                                    Unit Price: { cartItem.productQty }
+                                    Quantity in Cart: { cartItem.productQty }
                                 </h2>
                                 <h2>
-                                    Quantity in Cart: { cartItem.productTotal }
+                                    Unit Price: { cartItem.productTotal }
                                 </h2>
                                 <h2>
-                                    Total Price: { cartItem.cartTotal }
+                                    Total Price: { (cartItem.cartTotal*1).toFixed(2) }
                                 </h2>
                                 <h2>
                                 <button onClick={() => destroy(cartItem.id)}>Remove from cart</button>
@@ -34,7 +34,9 @@ const Cart = ({ isLoggedIn, userId, cart, customers, destroy }) => {
                             </li>
                         )
                     })}
+                    <Link to='/checkout'> checkout </Link>
                 </ul>
+                
             ) : (
                 <h2>
                     No products in your cart. 
@@ -42,20 +44,14 @@ const Cart = ({ isLoggedIn, userId, cart, customers, destroy }) => {
                 </h2>
             ) : (
                 <ul>
-                    {/* Placholder: to be reviewed once 'checkout as a guest functionallity is included */}
-                    {cart.map((product) => {
-                        return (
-                            <li key={product.id}>
-                                <h2>
-                                    { product.productName }
-                                    ({ product.productQty })
-                                </h2>
-                            </li>
-                        )
-                    })}
+                    <h2>
+                        Login or Sign up to continue.
+                        <Link to='/login'> Log in </Link>
+                        <Link to='/signup'> Sign up </Link>
+                    </h2>
                 </ul>
             )}
-            <Link to='/checkout'> checkout </Link>
+            {/* <Link to='/checkout'> checkout </Link> */}
         </div>
     )
 };

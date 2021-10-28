@@ -1,6 +1,18 @@
 'use strict'
 
 const {db, models: {Admin, Cart, Customer, Invoice, Product, ProductType, Room, User}} = require('../server/db')
+const faker = require('faker');
+const productArr = [];
+for(let i = 0; i<50; i++){
+  productArr.push(Math.round(Math.random()*21))
+}
+
+const livingRoomTypes = ['Couch', 'Coffee Table', 'End Table', 'TV', 'TV Stand', 'Sofa', 'Love Seat', 'Rug', 'Lamp', 'Shelf']
+const bedRoomTypes = ['Bed', 'Night Stand', 'Dresser', 'Desk', 'Chair', 'Lamp', 'Rug', 'Shelf', 'Wardrobe']
+const kitchenTypes = ['Cabinets', 'Pots & Pans', 'Dishes', 'Appliances']
+const diningRoomTypes = ['Table', 'Chair', 'Cabinets', 'Lamp']
+const productTypesArr = ['Couch', 'Coffee Table', 'End Table', 'TV', 'TV Stand', 'Sofa', 'Love Seat', 'Rug', 'Lamp', 'Shelf','Bed', 'Night Stand', 'Dresser', 'Desk', 'Chair', 'Wardrobe', 'Cabinets', 'Pots & Pans', 'Dishes', 'Appliances', 'Table' ]
+const roomTypes = ['Living Room', 'Bed Room', 'Kitchen', 'Dining Room']
 
 /**
  * seed - this function clears the database, updates tables to
@@ -49,18 +61,25 @@ async function seed() {
   ]);
 
   const products = await Promise.all([
-    Product.create({ name: 'kitchen table', description: 'it"s a table', quantity: 5, cost: 305.23, imageUrl:'data:image/jpeg;base64,/fakeimageurl'}),
-    Product.create({ name: 'kitchen chair', description: 'it"s a chair', quantity: 2, cost: 13.53, imageUrl:'data:image/jpeg;base64,/fakeimageurl'}),
-    Product.create({ name: 'bathroom table', description: 'it"s a table', quantity: 1, cost: 5.32, imageUrl: 'data:image/jpeg;base64,/fakeimageurl'}),
-    Product.create({ name: 'bathroom chair', description: 'it"s a chair', quantity: 304, cost: 902.3, imageUrl:'data:image/jpeg;base64,/fakeimageurl'}),
+    productArr.forEach(num =>{
+      Product.create({name: (faker.lorem.word() + " " + productTypesArr[num]).toUpperCase() , description: faker.lorem.paragraph(), quantity: Math.round(Math.random()*50), cost: faker.commerce.price()})
+    })
   ]);
 
   const productTypes = await Promise.all([
+    //WHYYYY relation doesnot exist
     ProductType.create({ name:'chair' }),
     ProductType.create({ name:'table' }),
+    productTypesArr.forEach(type =>{
+      ProductType.create({ name: type })
+    })
   ]);
 
   const rooms = await Promise.all([
+    roomTypes.forEach(room =>{
+      Room.create({ name: room })
+    }),
+    //WHYYYY?
     Room.create({ name:'bedroom' }),
     Room.create({ name:'kitchen' }),
   ]);
@@ -82,6 +101,8 @@ async function seed() {
       murphy: users[1]
     }
   }
+
+
 };
 
 /*

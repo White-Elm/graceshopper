@@ -50,17 +50,17 @@ router.get('/cartTotal/:id', async (req, res, next) => {
 // handles -create new cart item (includes product to cart)
 router.post('/', async (req, res, next) => {
   try {
-    res.send(await Cart.create({
+    const cart = await Cart.create({
       customerId: req.body.customerId,
       productName: req.body.productName,
       productQty: req.body.productQty,
-      //
       // debug: I'm passing in add'l product properties to our DB (later these are used in the cart & checkout component)
       productTotal: req.body.productTotal,
       cartTotal: req.body.cartTotal,
-      // customerId: req.body.customerId,
+      customerId: req.body.customerId,
       productId: req.body.productId,
-    }));
+    })
+    res.send(cart);
   }
   catch (error) {
     next(error);
@@ -94,17 +94,17 @@ router.delete('/:customerId', async (req, res, next) => {
 });
 
 
-// // PUT /api/cart/:id
-// // handles -update/edit product quantity in cart
-// router.put('/:id', async (req, res, next) => {
-//     try {
-//       const product = await Cart.findByPk(req.params.id);
-//       res.send(await product.update(req.body));
-//     }
-//     catch (error) {
-//       next(error);
-//     }
-//   });
+// PUT /api/cart/:id
+// handles -update/edit product quantity in cart
+router.put('/:id', async (req, res, next) => {
+    try {
+      const product = await Cart.findByPk(req.params.id);
+      res.send(await product.update(req.body));
+    }
+    catch (error) {
+      next(error);
+    }
+  });
 
 
 // // GET /api/cart/:id/checkout

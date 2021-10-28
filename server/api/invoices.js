@@ -33,7 +33,15 @@ router.get('/customerId/:id', async (req, res, next) => {
 // add invoice after an order is complete
   router.post('/', async (req, res, next) => {
     try {
-      const invoice = await Invoice.create(req.body);
+      const invoice = await Invoice.create({
+        customerId: req.body.customerId,
+        userId: req.body.userId,
+        productName: req.body.productName,
+        productQty: req.body.productQty,
+        productTotal: req.body.productTotal,
+        cartTotal: req.body.cartTotal,
+        productId: req.body.productId,
+      });
       res.send(invoice);
    } catch (err) {
       next(err)

@@ -1,5 +1,5 @@
 const router = require('express').Router()
-const { models: { Customer }} = require('../db')
+const { models: { Customer, Cart }} = require('../db')
 module.exports = router
 
 // GET /api/customers
@@ -31,11 +31,17 @@ router.put('/:id', async (req, res, next) => {
   }
 });
 
-// PUT /api/customers
+// POST /api/customers
 
 router.post('/', async(req, res, next)=> {
   try {
-    const customer = await Customer.create(req.params.id);
+    const customer = await Customer.create({id: req.params.id,
+    carts: {
+      customerId: req.body.id,
+    }},
+    {
+      include:[Cart]
+    });
     res.status(201).send(await Customer.create(req.body));
   }
   catch(ex){

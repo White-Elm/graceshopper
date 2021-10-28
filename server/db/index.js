@@ -18,11 +18,11 @@ const User = require('./models/User');
 User.hasMany(Admin);
 Admin.belongsTo(User);
 
-Cart.belongsTo(Customer);
-Customer.hasMany(Cart);
-
 User.hasMany(Customer);
 Customer.belongsTo(User);
+
+User.hasMany(Cart);
+Cart.belongsTo(User);
 
 Cart.belongsTo(Product);
 Product.hasMany(Cart);
@@ -36,6 +36,9 @@ ProductType.hasMany(Product);
 
 Product.belongsTo(Room);
 Room.hasMany(Product);
+
+
+
 
 module.exports = {
   db,

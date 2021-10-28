@@ -4,34 +4,38 @@ import {connect} from 'react-redux';
 import axios from "axios";
 import { addInvoice, deleteCart } from "../store";
 
-
-const mapStateToProps = ({ cart }) => ({ cart });
-const mapDispatchToProps = (dispatch) => {
-  return{
-    destroy: (cart) => {
-      dispatch(addInvoice())
-      dispatch(deleteCart(cart));
-    }
-  };
-};
-
-const Payment = ( { cart }) => {
-  
+const Payment = ( { cart, destroy}) => {
   const stripePK = process.env.REACT_APP_STRIPE_PK;
-  console.log(stripePK);
 
-  let cartTotal =0;
-  cart.map((product) => {
-    let productTotal = parseInt(product.productTotal)  
-    cartTotal += productTotal;
-    });
-      
+  const cartTotal = cart.length ? cart.reduce((sum, cartItem) => sum + cartItem.cartTotal*1, cart[0].cartTotal*1) : 0;
+
    async function handleToken(token, addresses) {
     const response = await axios.post(
       process.env.REACT_APP_STRIPE_RESPONSE,
       { token, cart }
     );
+    if (cart.length >= 1){
+      console.log(cart)
+      var event = new CustomEvent("event", { "detail": "waiting for stripe response" });
+      document.dispatchEvent(event);
+    }
   }
+  document.addEventListener("event", function(){
+    const invoice = {
+            productName: cart[0].productName,
+            productQty: cart[0].productQty,
+            productTotal: cart[0].productTotal,
+            invoiceTotal: cart[0].productQty*cart.cartTotal,
+            customerId: cart[0].customerId,
+            productId: cart[0].productId,
+            userId: cart[0].userId,
+    }
+
+    console.log('this is the invoice', invoice);
+    console.log('this is the invoice', cart);
+
+    destroy(invoice)
+  })
 
     return (
         <div>
@@ -61,6 +65,17 @@ const Payment = ( { cart }) => {
     )
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(Payment)
+const mapStateToProps = ({ cart }) => ({ cart });
 
+const mapDispatchToProps = (dispatch, {history}) => {
+  return{
+    destroy: (invoice) => {
+      dispatch(addInvoice(invoice, history));
+      dispatch(deleteCart(invoice.userId));
+    }
+};
+}
 
+export default connect(mapStateToProps, mapDispatchToProps)(Payment) 
+
+//helllooo this is a test 

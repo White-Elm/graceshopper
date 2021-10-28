@@ -33,28 +33,33 @@ const _deleteCart = (cart) => {
     };
 };
 
+const _addInvoice = (cart) => { 
+    return {
+        type: ADD_INVOICE,
+        cart,
+    };
+};
+
 
 // thunk
 export const fetchInvoice = () => {
     return async (dispatch) => {
-        const { data: invoice } = await axios.get('/api/invoice');
+        const { data: invoice } = await axios.get('/api/invoices');
         dispatch(_loadInvoice(invoice));
     };
 };
 
-export const addInvoice = () => {
+export const addInvoice = (invoice1) => {
     return async (dispatch) => {
-        const invoice = await axios.post('/api/invoice');
-        window.localStorage.setItem(invoice)
-        dispatch(finalCart());
+        const invoice = await axios.post(`/api/invoices`,{ invoice:invoice1 }).data;
+        dispatch(_addInvoice(invoice));
     };
 };
 
-export const deleteCart = (customerId) => {
-    console.log(id)
+export const deleteCart = (userId) => {
     return async (dispatch) => {
-        await axios.delete(`/api/cart/${customerId}`);
-        dispatch(_deleteCart({ id: id * 1 }));
+        await axios.delete(`/api/cart/${userId}`);
+        dispatch(_deleteCart({ userId: userId * 1 }));
     };
 };
 

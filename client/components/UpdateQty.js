@@ -1,6 +1,7 @@
 import React, {Component} from 'react'
 import {connect} from 'react-redux';
-import {addToCart} from '../store/productsReducer';
+// import {addToCart} from '../store/productsReducer';
+import {addToCart} from '../store/cart';
 import {Link} from 'react-router-dom';
 
 class UpdateQty extends Component{

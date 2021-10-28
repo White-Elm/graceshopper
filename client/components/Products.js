@@ -113,6 +113,7 @@ class Products extends Component{
                         return (
                             <li key={product.id}>
                                 <h2>
+                                    <img src={product.imageUrl ? product.imageUrl : 'https://st4.depositphotos.com/14953852/22772/v/600/depositphotos_227725020-stock-illustration-image-available-icon-flat-vector.jpg'}/>
                                     <Link to={`/products/${product.id}`}> { product.name }, price: { product.cost} </Link>
                                 </h2>
                             </li>

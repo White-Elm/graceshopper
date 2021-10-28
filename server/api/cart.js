@@ -52,6 +52,7 @@ router.post('/', async (req, res, next) => {
   try {
     const cart = await Cart.create({
       customerId: req.body.customerId,
+      userId: req.body.userId,
       productName: req.body.productName,
       productQty: req.body.productQty,
       // debug: I'm passing in add'l product properties to our DB (later these are used in the cart & checkout component)
@@ -59,6 +60,7 @@ router.post('/', async (req, res, next) => {
       cartTotal: req.body.cartTotal,
       customerId: req.body.customerId,
       productId: req.body.productId,
+    }
     })
     res.send(cart);
   }
@@ -82,9 +84,9 @@ router.delete('/:id', async (req, res, next) => {
 
 // DELETE /api/cart/:id
 // handles -delete product from cart
-router.delete('/:customerId', async (req, res, next) => {
+router.delete('/:userId', async (req, res, next) => {
   try {
-    const cart = await Cart.findByPk(req.params.customerId);
+    const cart = await Cart.findByPk(req.body.userId);
     await cart.destroy();
     res.send(cart);
   }
@@ -92,6 +94,21 @@ router.delete('/:customerId', async (req, res, next) => {
     next(error);
   }
 });
+
+// PUT /api/products/:id
+router.put('/:id', async (req, res, next) => {
+  try {
+    const cart = await Cart.findByPk(req.params.id);
+    res.send(await cart.update({
+      cart: req.body.userId,
+    }))
+  }
+  catch (error) {
+    next(error);
+  }
+});
+
+
 
 
 // PUT /api/cart/:id

@@ -5,7 +5,6 @@ const LOAD_PRODUCTS = 'LOAD_PRODUCTS';
 const ADD_TO_CART = 'ADD_TO_CART';
 const UPDATE_PRODUCT = 'UPDATE_PRODUCT';
 
-
 const productReducers = (state = [], action) =>{
   if(action.type === LOAD_PRODUCTS){
       state = action.products;
@@ -17,6 +16,7 @@ const productReducers = (state = [], action) =>{
   if(action.type === UPDATE_PRODUCT){
       state = state.map(product => product.id !== action.product.id ? product : action.product)
   }
+
   return state;
 }
 
@@ -36,6 +36,7 @@ const _loadProducts = (products) =>{
 
 const addToCart = (cart, history) =>{ // debug: I changed the first variable to 'cart' (which is basically all variables combined) bc now I'm passing add'l product variables
     return async (dispatch) =>{
+      
         const previousCart = (await axios.get('/api/cart')).data.filter(custCart => custCart.customerId === cart.customerId && custCart.productId === cart.productId);
 
         if (previousCart.length) {

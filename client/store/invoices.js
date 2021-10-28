@@ -44,23 +44,22 @@ const _addInvoice = (cart) => {
 // thunk
 export const fetchInvoice = () => {
     return async (dispatch) => {
-        const { data: invoice } = await axios.get('/api/invoice');
+        const { data: invoice } = await axios.get('/api/invoices');
         dispatch(_loadInvoice(invoice));
     };
 };
 
-export const addInvoice = (id,productName,productQty,productTotal,invoiceTotal,createdAt , updatedAt ,productId,customerId,history) => {
+export const addInvoice = (invoice1) => {
     return async (dispatch) => {
-        const invoice = await axios.post(`/api/invoices/${customerId}`,{ id,productName,productQty,productTotal,invoiceTotal,createdAt , updatedAt ,productId,customerId}).data;
+        const invoice = await axios.post(`/api/invoices`,{ invoice:invoice1 }).data;
         dispatch(_addInvoice(invoice));
-        history.push(`/invoices/${customerId}`)
     };
 };
 
-export const deleteCart = (customerId) => {
+export const deleteCart = (userId) => {
     return async (dispatch) => {
-        await axios.delete(`/api/cart/${customerId}`);
-        dispatch(_deleteCart({ customerId: customerId * 1 }));
+        await axios.delete(`/api/cart/${userId}`);
+        dispatch(_deleteCart({ userId: userId * 1 }));
     };
 };
 

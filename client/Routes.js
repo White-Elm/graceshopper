@@ -11,16 +11,20 @@ import { fetchCustomer } from './store/customers';
 import Cart from './components/Cart';
 import Checkout from './components/Checkout';
 import SingleProduct from './components/SingleProduct';
-// import Payment from './components/Stripe Integration/Payment';
-import {loadProducts} from './store/productsReducer';
+import {loadProducts, _loadProducts} from './store/productsReducer';
+import Payment from './components/Payment';
 import {loadRooms} from './store/roomsReducer';
 import {loadTypes} from './store/typesReducer';
-// import Payment from './components/Payment';
 import SingleCustomer from './components/SingleCustomer';
 import AdminHome from './components/Admin/AdminHome';
 import AdminProducts from './components/Admin/AdminProducts';
 import AdminSingleProduct from './components/Admin/AdminSingleProduct';
 import AdminCustomers from './components/Admin/AdminCustomers'
+import AddCustomerInfo from './components/AddCustomerInfo'
+import { fetchAdmin } from './store/admins';
+import TestingPayment from './components/scratch';
+
+
 
 /**
  * COMPONENT
@@ -28,16 +32,21 @@ import AdminCustomers from './components/Admin/AdminCustomers'
 class Routes extends Component {
   componentDidMount() {
     this.props.loadInitialData();
-    // this.props._loadProducts()
-    this.props.loadProducts();
-    this.props.loadCart();
     this.props.loadCustomer();
-    this.props._loadRooms();
-    this.props._loadTypes();
+    this.props.loadAdmin();
+    // this.props._loadProducts()
+    setTimeout(() => { 
+      this.props.loadCart();
+      this.props.loadProducts();
+      this.props._loadRooms();
+      this.props._loadTypes();
+    }, 50);
   }
 
   render() {
     const {isLoggedIn} = this.props
+    //I added a loadAdmins prop, so we can check if the person's userId matches the one from the admins table 
+    //to display a different navbar
 
     return (
       <div>
@@ -48,21 +57,25 @@ class Routes extends Component {
             <Route exact path='/products' component={Products}/>
             <Route exact path='/products/:id' component={SingleProduct}/>
             <Route exact path='/products/Sort/:by?' component={Products} />
-            {/* {<Route exact path='/payment' component={Payment}/>} */}
             <Route path='/checkout' component={Checkout}/>
             <Route exact path='/Admin' component={AdminHome}/>
             <Route exact path='/admin/products' component={AdminProducts}/>
             <Route exact path='/admin/products/:id' component={AdminSingleProduct}/>
             <Route exact path='/Admin/Customers' component={AdminCustomers}/>
             <Route exact path='/Admin/customers/:id' component={SingleCustomer}/>
+            <Route exact path='/products' component={Products}/>
+            <Route path='/products/:id' component={SingleProduct}/>
+            <Route exact path='/payment' component={Payment}/>
+            <Route exact path='/customers/:id' component={SingleCustomer}/>
+            <Route exact path='/customerprofile' component={AddCustomerInfo}/>
 
           </Switch>
         </div>
         <div>
           {isLoggedIn ? (
-            <Fragment>ß
+            <Fragment>
               <Route path="/home" exact component={Home} />
-              <Redirect to="/home" />
+              {/* <Redirect to="/home" /> */}
             </Fragment>
           ) : (
             <Switch>
@@ -93,9 +106,9 @@ const mapDispatch = dispatch => {
     loadInitialData() {
       dispatch(me())
     },
+    loadProducts: () => dispatch(fetchProducts()),
   //check both load products  
     loadProducts: () => dispatch(fetchProducts()),
-    loadCart: () => dispatch(fetchCart()),
 
     _loadProducts : async () =>{
       dispatch(loadProducts())
@@ -108,6 +121,11 @@ const mapDispatch = dispatch => {
     },
 
     loadCustomer: () => dispatch(fetchCustomer()),
+
+    loadAdmin: () => dispatch(fetchAdmin()),
+    loadCart: () => dispatch(fetchCart()),
+
+
 
   }
 }

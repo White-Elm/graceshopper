@@ -19,7 +19,6 @@ router.get('/customerId/:id', async (req, res, next) => {
       const cart = await Cart.findAll({
         where: {
           customerId: req.params.id
-        }
       })
       res.send(cart);
     }

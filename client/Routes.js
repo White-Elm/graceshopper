@@ -22,8 +22,6 @@ import AdminSingleProduct from './components/Admin/AdminSingleProduct';
 import AdminCustomers from './components/Admin/AdminCustomers'
 import AddCustomerInfo from './components/AddCustomerInfo'
 import { fetchAdmin } from './store/admins';
-import TestingPayment from './components/scratch';
-
 
 
 /**

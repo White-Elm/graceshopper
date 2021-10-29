@@ -2,7 +2,11 @@ import React, {Component} from 'react'
 import {connect} from 'react-redux';
 // import {addToCart} from '../store/productsReducer';
 import {addToCart} from '../store/cart';
-import {Link} from 'react-router-dom';
+import FormControl from '@mui/material/FormControl';
+import Select from '@mui/material/Select';
+import Button from '@mui/material/Button';
+import { MenuItem }from '@mui/material';
+
 
 class UpdateQty extends Component{
     constructor(props){
@@ -29,7 +33,6 @@ class UpdateQty extends Component{
         event.preventDefault();
         // this.props.addToCart(product.name, productQty) 
         const cart = { // debug: I included customerId and other product properties we'll need in the store
-            id: '',
             productName: product.name,
             productQty: productQty,
             productTotal: product.cost,
@@ -50,17 +53,17 @@ class UpdateQty extends Component{
         const {onChange, onSubmit} = this;
 
         return(
-            <form onSubmit={onSubmit}>
-                <select value={productQty} name='productQty' onChange = {onChange}>
+            <FormControl onSubmit={onSubmit}>
+                <Select value={productQty} name='productQty' onChange = {onChange}>
                     {stockArr.map(stock =>{
                         return(
-                        <option key = {stock} value={stock} onChange = {onChange}>
+                        <MenuItem key = {stock} value={stock} onChange = {onChange}>
                             {stock}
-                        </option>)
+                        </MenuItem>)
                     })}
-                </select>
-                <button>Add to Cart</button>
-            </form>
+                </Select>
+                <Button variant="outlined" >Add to Cart</Button>
+                </FormControl>
         )
     }
 }

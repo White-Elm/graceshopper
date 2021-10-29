@@ -2,12 +2,18 @@ import React from "react";
 import StripeCheckout from "react-stripe-checkout";
 import {connect} from 'react-redux';
 import axios from "axios";
-import { addInvoice, deleteCart } from "../store";
+import Button from '@mui/material/Button';
+import Grid from '@mui/material/Grid';
+import Typography from '@mui/material/Typography';
+import { createTheme,  ThemeProvider} from '@mui/material';
+import { destroyCartItem} from '../store/cart';
 
-const Payment = ( { cart, destroy}) => {
+
+const Payment = ( { cart, destroy }) => {
   const stripePK = process.env.REACT_APP_STRIPE_PK;
 
   const cartTotal = cart.length ? cart.reduce((sum, cartItem) => sum + cartItem.cartTotal*1, cart[0].cartTotal*1) : 0;
+  const theme = createTheme();
 
    async function handleToken(token, addresses) {
     const response = await axios.post(
@@ -38,21 +44,26 @@ const Payment = ( { cart, destroy}) => {
   })
 
     return (
-        <div>
-            <ul>
-                {cart.map((product) => {
-                    return (
-                        <li key={product.id}>
-                            <h2>
-                                { product.productName }
-                                ({ product.productQty })
-                                { product.productTotal }
-                            </h2>
-                        </li>
-                    )
-                })}
-            </ul>
-            <h3> Cart Total: {cartTotal} </h3>
+      <ThemeProvider theme={theme}>
+            {cart.map((cartItem) => {
+                        return (
+                          <Grid item key={cartItem.id} xs={12} sm={6} md={4} align="center">
+                                <Typography variant="h5" align="center" color="text.secondary">
+                                    Product Name: { cartItem.productName }
+                                </Typography>
+                                <Typography variant="h5" align="center" color="text.secondary">
+                                    Quantity in Cart: { cartItem.productQty }
+                                    </Typography>
+                                <Typography variant="h5" align="center" color="text.secondary">
+                                    Unit Price: { cartItem.productTotal }
+                                    </Typography>
+                                <Typography variant="h5" align="center" color="text.secondary">
+                                <Button variant="contained" onClick={() => destroy(cartItem.id)}>Remove from cart</Button>
+                                </Typography>
+                        </Grid>
+                        )
+                    })}
+             <Typography variant="h3" align="left" color="text.secondary"> Cart Total: ${cartTotal} </Typography>
             < StripeCheckout 
         stripeKey= {stripePK}
         amount={cartTotal * 100}
@@ -61,20 +72,26 @@ const Payment = ( { cart, destroy}) => {
         billingAddress
         shippingAddress
       />
-        </div>
+        </ThemeProvider>
     )
 };
 
-const mapStateToProps = ({ cart }) => ({ cart });
-
-const mapDispatchToProps = (dispatch, {history}) => {
+const mapDispatchToProps = (dispatch) => {
   return{
-    destroy: (invoice) => {
-      dispatch(addInvoice(invoice, history));
-      dispatch(deleteCart(invoice.userId));
-    }
+      destroy: (cartItem) => {
+          dispatch(destroyCartItem(cartItem));
+      }
+  };
 };
-}
+
+const mapStateToProps = (state) => {
+  return {
+      isLoggedIn: !!state.auth.id,
+      userId: state.auth.id,
+      cart: state.cart,
+      customers: state.customers
+  }
+};
 
 export default connect(mapStateToProps, mapDispatchToProps)(Payment) 
 

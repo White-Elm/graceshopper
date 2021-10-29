@@ -2,36 +2,44 @@ import React from 'react';
 import { connect } from 'react-redux';
 import {Link} from 'react-router-dom';
 import { destroyCartItem} from '../store/cart';
-
+import Button from '@mui/material/Button';
+import Grid from '@mui/material/Grid';
+import Typography from '@mui/material/Typography';
+import { createTheme,  ThemeProvider} from '@mui/material';
 
 const Cart = ({ isLoggedIn, userId, cart, customers, destroy }) => {
+    const newCart = setTimeout(() => { return cart }, 50)
     const customer = customers.filter( user => user.userId === userId );
     const customerId = isLoggedIn && customer.length ? customer[0].id : null;
     const hasCart = cart.filter(item => item.customerId === customerId);
+    const theme = createTheme();
+
 
     return (
-        <div>
+        <ThemeProvider theme={theme}>
             { isLoggedIn? hasCart.length? (
                 <ul>
                     {hasCart.map((cartItem) => {
                         return (
-                            <li key={cartItem.id}>
-                                <h2>
+                            <Grid item key={cartItem.id} xs={12} sm={6} md={4} align="center">
+                            <MenuItem key={cartItem.id}>
+                            <Typography variant="h5" align="center" color="text.secondary">
                                     Product Name: { cartItem.productName }
-                                </h2>
-                                <h2>
+                                </Typography>
+                                <Typography variant="h5" align="center" color="text.secondary">
                                     Quantity in Cart: { cartItem.productQty }
-                                </h2>
-                                <h2>
+                                </Typography>
+                                <Typography variant="h5" align="center" color="text.secondary">
                                     Unit Price: { cartItem.productTotal }
-                                </h2>
-                                <h2>
+                                </Typography>
+                                <Typography variant="h5" align="center" color="text.secondary">
                                     Total Price: { (cartItem.cartTotal*1).toFixed(2) }
-                                </h2>
-                                <h2>
-                                <button onClick={() => destroy(cartItem.id)}>Remove from cart</button>
-                                </h2>
-                            </li>
+                                </Typography>
+                                <Typography variant="h5" align="center" color="text.secondary">
+                                <Button variant="contained" onClick={() => destroy(cartItem.id)}>Remove from cart</Button>
+                                </Typography>
+                            </MenuItem>
+                        </Grid>
                         )
                     })}
                     <Link to='/checkout'> checkout </Link>
@@ -52,7 +60,7 @@ const Cart = ({ isLoggedIn, userId, cart, customers, destroy }) => {
                 </ul>
             )}
             {/* <Link to='/checkout'> checkout </Link> */}
-        </div>
+            </ThemeProvider>
     )
 };
 

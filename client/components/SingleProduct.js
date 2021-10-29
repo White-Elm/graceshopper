@@ -3,6 +3,10 @@ import {connect} from 'react-redux'
 import {Link} from 'react-router-dom';
 import UpdateQty from './UpdateQty';
 //import SimilarProducts from './SimilarProducts'
+import Grid from '@mui/material/Grid';
+import Button from '@mui/material/Button';
+import Card from '@mui/material/Card';
+import { MenuItem }from '@mui/material';
 
 
 
@@ -18,18 +22,20 @@ const SingleProduct = ({products, match: {params: {id}} , history}) =>{
     }
 
     return(
-        <div>
-            <Link to='/Products'>Back to Products</Link>
+        <Grid item key={product} xs={12} sm={6} md={4}>
+           <Card sx={{ height: '100%', display: 'flex', flexDirection: 'column' }} >
+           <Link to='/Products'><Button variant="contained">Back to Products</Button></Link>
             <div>
                 <img src={product.imageUrl ? product.imageUrl : ''}/>
             </div>
             <div>
-                <div>{product.name}</div>
-                <div>{product.cost}</div>
-                <div>{product.description}</div>
+                <MenuItem>{product.name}</MenuItem>
+                <MenuItem>{product.cost}</MenuItem>
+                <MenuItem>{product.description}</MenuItem>
             </div>
             <UpdateQty product={product} history={history}/>
-        </div>
+            </Card>
+             </Grid>
     )
 }
 

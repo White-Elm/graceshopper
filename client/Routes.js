@@ -33,14 +33,13 @@ class Routes extends Component {
     this.props.loadCustomer();
     this.props.loadAdmin();
     // this.props._loadProducts()
-    setTimeout(() => { 
+
       this.props.loadCart();
       this.props.loadProducts();
       this.props._loadRooms();
       this.props._loadTypes();
-    }, 50);
-  }
 
+  };
   render() {
     const {isLoggedIn} = this.props
     //I added a loadAdmins prop, so we can check if the person's userId matches the one from the admins table 

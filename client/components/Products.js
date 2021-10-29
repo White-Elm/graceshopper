@@ -1,6 +1,24 @@
-import React, {Component} from 'react';
+import * as React from 'react';
+import {Component} from 'react';
 import { connect } from 'react-redux';
 import { Link, Redirect } from 'react-router-dom';
+import AppBar from '@mui/material/AppBar';
+import Button from '@mui/material/Button';
+import Card from '@mui/material/Card';
+import CardActions from '@mui/material/CardActions';
+import CardContent from '@mui/material/CardContent';
+import CardMedia from '@mui/material/CardMedia';
+import CssBaseline from '@mui/material/CssBaseline';
+import Grid from '@mui/material/Grid';
+import Stack from '@mui/material/Stack';
+import Box from '@mui/material/Box';
+import Toolbar from '@mui/material/Toolbar';
+import Typography from '@mui/material/Typography';
+import Container from '@mui/material/Container';
+import FormControl from '@mui/material/FormControl';
+import Select from '@mui/material/Select';
+import { InputLabel, MenuItem} from '@mui/material';
+import { createTheme,  ThemeProvider} from '@mui/material';
 
 
 class Products extends Component{
@@ -77,59 +95,90 @@ class Products extends Component{
         if(matchBy === 'HighToLow'){
             products.sort((A,B) => B.cost.localeCompare(A.cost))
         }
+        const theme = createTheme();
 
         //Filters
         return (
-            <div>
-                <div className ='SortProducts'>
-                    <Link to='/Products'>Remove Filters / Sorts</Link>
-                    <br/>
-                    <Link to='/Products/Sort/aToz'>A to Z</Link>
-                    <br/>
-                    <Link to='/Products/Sort/zToa'>Z to A</Link>
-                    <br/>
-                    {/* <Link to='/Products/Sort/LowToHigh'>Low to High</Link>
-                    <br/>
-                    <Link to='/Products/Sort/HighToLow'>High to Low</Link>
-                    <br/> */}
-                </div>
-                <div>
-                    <form onSubmit={onSubmit}>
-                        <select value={productRoom} name='productRoom' onChange={onChange}>
-                            <option>Filter By Room</option>
+            <ThemeProvider theme={theme}>
+
+             <Box
+          sx={{
+            bgcolor: 'background.paper',
+            pt: 8,
+            pb: 6,
+          }}
+        >
+          <Container maxWidth="sm">
+            <Typography
+              component="h1"
+              variant="h2"
+              align="center"
+              color="text.primary"
+              gutterBottom
+            >
+              Our Products
+            </Typography>
+            <Typography variant="h5" align="center" color="text.secondary" paragraph>
+              We offer the best selections of furniture, think Ikea but better
+            </Typography> 
+                
+            <Stack
+              sx={{ pt: 4 }}
+              direction="row"
+              spacing={2}
+              justifyContent="center"
+            > 
+            <Link to='/Products'><Button variant="contained">Remove Filters / Sorts</Button></Link> 
+            <Link to='/Products/Sort/aToz'><Button variant="outlined">A to Z</Button></Link>
+            <Link to='/Products/Sort/zToa'><Button variant="outlined">Z to A</Button></Link>
+                    <FormControl onSubmit={onSubmit}>
+                        <Select value={productRoom} name='productRoom' onChange={onChange}>
+                            <InputLabel>Filter By Room</InputLabel>
                             {roomIdArr.map(roomId =>{
                                 return(
-                                    <option key={roomId} value ={rooms.find(room => room.id === roomId) ? rooms.find(room => room.id === roomId).name : null} onChange={onChange}>
+                                    <MenuItem key={roomId} value ={rooms.find(room => room.id === roomId) ? rooms.find(room => room.id === roomId).name : null} onChange={onChange}>
                                         {rooms.find(room => room.id === roomId) ? rooms.find(room => room.id === roomId).name : null}
-                                    </option>
+                                    </MenuItem>
                                 )
                             })}
-                        </select>
-                        <select value={productType} name='productType' onChange={onChange}>
-                            <option>Filter By Product Type</option>
+                        </Select>
+                    </FormControl>
+                    <FormControl onSubmit={onSubmit}>
+                        <Select value={productType} name='productType' onChange={onChange}>
+                            <InputLabel>Filter By Product Type</InputLabel>
                             {productTypeIdArr.map(typeId =>{
                                     return(
-                                        <option key={typeId} value ={types.find(type => type.id === typeId) ? types.find(type => type.id === typeId).name : null} onChange={onChange}>
+                                        <MenuItem key={typeId} value ={types.find(type => type.id === typeId) ? types.find(type => type.id === typeId).name : null} onChange={onChange}>
                                             {types.find(type => type.id === typeId) ? types.find(type => type.id === typeId).name : null}
-                                        </option>
+                                        </MenuItem>
                                     )
                             })}
-                        </select>
-                    </form>
-                </div>
-                <ul>
+                        </Select>
+                    </FormControl>
+                </Stack>
+                </Container>
+            </Box>
+                <Grid container spacing={4}>
                     {products.map((product) => {
                         return (
+                            <Grid item key={product} xs={12} sm={6} md={4}>
+                            <Card
+                              sx={{ height: '100%', display: 'flex', flexDirection: 'column' }}
+                            >
+            
                             <li key={product.id}>
                                 <h2>
                                     <img src={product.imageUrl ? product.imageUrl : 'https://st4.depositphotos.com/14953852/22772/v/600/depositphotos_227725020-stock-illustration-image-available-icon-flat-vector.jpg'}/>
-                                    <Link to={`/products/${product.id}`}> { product.name }, price: { product.cost} </Link>
+                                    <Link to={`/products/${product.id}`}> <Typography>{ product.name }, price: { product.cost}</Typography> </Link>
                                 </h2>
                             </li>
+                            </Card>
+                            </Grid>
                         )
                     })}
-                </ul>
-            </div>
+            </Grid>
+            </ThemeProvider>
+
         )
     }
 }

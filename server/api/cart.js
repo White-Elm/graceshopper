@@ -59,7 +59,6 @@ router.post('/', async (req, res, next) => {
       cartTotal: req.body.cartTotal,
       customerId: req.body.customerId,
       productId: req.body.productId,
-    }
     })
     res.send(cart);
   }

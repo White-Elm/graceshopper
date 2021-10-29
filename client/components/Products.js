@@ -35,21 +35,21 @@ class Products extends Component{
         
         if(products.length > 0){
             for(let i = 0; i<products.length; i++){
-                if(products[i].roomId && !roomIdArr[products[i].roomId]){
+                if(products[i].roomId && !roomIdArr.includes(products[i].roomId) ){
                     roomIdArr.push(products[i].roomId)
                 }
             }
 
             for(let i = 0; i<products.length; i++){
-                if(products[i].productTypeId && !productTypeIdArr[products[i].productTypeId]){
+                if(products[i].productTypeId && !productTypeIdArr.includes(products[i].productTypeId)){
                     productTypeIdArr.push(products[i].productTypeId)
                 }
             }
         }
         for(let i = 0; i<roomIdArr.length; i++){
-            const roomId = rooms.find(room => room.name === matchBy) ? room.find(room => room.name === matchBy).id : null
+            const roomId = rooms.find(room => room.name === matchBy) ? rooms.find(room => room.name === matchBy).id : null
             if(roomId !== null){
-                products = products.filter(product => product.roomId === typeId)
+                products = products.filter(product => product.roomId === roomId)
             }
         }
         for(let i = 0; i<productTypeIdArr.length; i++){
@@ -71,7 +71,12 @@ class Products extends Component{
         if(matchBy === 'zToa'){
             products.sort((A,B) => B.name.localeCompare(A.name))
         }
-        
+        if(matchBy === 'LowToHigh'){
+            products.sort((A,B) => A.cost.localeCompare(B.cost))
+        }
+        if(matchBy === 'HighToLow'){
+            products.sort((A,B) => B.cost.localeCompare(A.cost))
+        }
 
         //Filters
         return (
@@ -83,6 +88,10 @@ class Products extends Component{
                     <br/>
                     <Link to='/Products/Sort/zToa'>Z to A</Link>
                     <br/>
+                    {/* <Link to='/Products/Sort/LowToHigh'>Low to High</Link>
+                    <br/>
+                    <Link to='/Products/Sort/HighToLow'>High to Low</Link>
+                    <br/> */}
                 </div>
                 <div>
                     <form onSubmit={onSubmit}>

@@ -25,7 +25,7 @@ class UpdateQty extends Component{
         this.setState({productQty: event.target.value})
     }
     onSubmit(event){
-        const {customerId, productQty, product, userId} = this.state; // debug: included customerId
+        const {customerId, productQty, product} = this.state; // debug: included customerId
         event.preventDefault();
         // this.props.addToCart(product.name, productQty) 
         const cart = { // debug: I included customerId and other product properties we'll need in the store
@@ -36,7 +36,6 @@ class UpdateQty extends Component{
             cartTotal: productQty*product.cost,
             customerId: customerId,
             productId: product.id,
-            userId: userId,
         };
 
         this.props.addToCart(cart);
@@ -78,7 +77,7 @@ const mapStateToProps = (state) =>{
 const mapDispatchToProps = (dispatch, {history}) => {
     return{
         // addToCart: (customerId, productName, productQty) =>{
-        addToCart: (cart, userId) =>{ // debug: I changed this variable to 'cart' (which is basically all variables combined) bc now I'm passing add'l product variables
+        addToCart: (cart) =>{ // debug: I changed this variable to 'cart' (which is basically all variables combined) bc now I'm passing add'l product variables
             // dispatch(addToCart(customerId, productName, productQty, history))
             dispatch(addToCart(cart, history))
         },

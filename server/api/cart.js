@@ -82,9 +82,9 @@ router.delete('/:id', async (req, res, next) => {
 
 // DELETE /api/cart/:id
 // handles -delete product from cart
-router.delete('/:userId', async (req, res, next) => {
+router.delete('/:customerId', async (req, res, next) => {
   try {
-    const cart = await Cart.findByPk(req.body.userId);
+    const cart = await Cart.findByPk(req.body.customerId);
     await cart.destroy();
     res.send(cart);
   }

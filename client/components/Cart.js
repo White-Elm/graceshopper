@@ -3,14 +3,16 @@ import { connect } from 'react-redux';
 import {Link} from 'react-router-dom';
 import { destroyCartItem} from '../store/cart';
 import Checkout from './Checkout';
-
+import StripeCheckout from "react-stripe-checkout";
+import axios from "axios";
 
 
 const Cart = ({ isLoggedIn, userId, cart, customers, destroy, products }) => {
     const customer = customers.filter( user => user.userId === userId );
     const customerId = isLoggedIn && customer.length ? customer[0].id : null;
     const hasCart = cart.filter(item => item.customerId === customerId);
-    console.log(products)
+    
+
     return (
         <div>
             { isLoggedIn? hasCart.length? (
@@ -42,11 +44,12 @@ const Cart = ({ isLoggedIn, userId, cart, customers, destroy, products }) => {
                                             </div>
                                     </div>
                                 </li>
+                                
                             )
                         })}
                         {/* <Link className="cartCheckout" to='/checkout'> CHECKOUT </Link> */}
                     </ul>
-                    <Checkout/>
+           <Checkout/>
                 </div>
                 
             ) : (

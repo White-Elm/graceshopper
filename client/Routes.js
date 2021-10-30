@@ -21,7 +21,7 @@ import AdminHome from './components/Admin/AdminHome';
 import AdminProducts from './components/Admin/AdminProducts';
 import AdminSingleProduct from './components/Admin/AdminSingleProduct';
 import AdminCustomers from './components/Admin/AdminCustomers'
-
+import AddCustomerInfo from './components/AddCustomerInfo'
 /**
  * COMPONENT
  */
@@ -60,8 +60,7 @@ class Routes extends Component {
             <Route exact path='/Admin/customers/:id' component={SingleCustomer}/>
             <Route exact path='/products' component={Products}/>
             <Route path='/products/:id' component={SingleProduct}/>
-
-            <Route exact path='/payment' component={Payment}/>
+            <Route path='/customerinfo' component={AddCustomerInfo}/>
             <Route exact path='/customers/:id' component={SingleCustomer}/>
           </Switch>
         </div>

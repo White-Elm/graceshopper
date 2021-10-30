@@ -17,7 +17,7 @@ export const Checkout = ({ isLoggedIn, userId, cart, customers }) => {
   const stripeTotal = cartTotal + taxes + shipping;
   async function handleToken(token, addresses) {
     const response = await axios.post(
-      "http://localhost:8080/",
+      "http://localhost:8080/home",
       { token, cart }
     );
     var event = new CustomEvent("event", { "detail": "waiting for stripe response" });

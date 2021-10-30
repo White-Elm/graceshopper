@@ -85,6 +85,7 @@ class Products extends Component{
         //Filters
         return (
             <div>
+                <div className="sortFilter">
                 <div className ='SortProducts'>
                     <Link to='/Products'>Remove Filters / Sorts</Link>
                     <br/>
@@ -97,9 +98,10 @@ class Products extends Component{
                     <Link to='/Products/Sort/HighToLow'>High to Low</Link>
                     <br/>
                 </div>
+
                 <div>
-                    <form onSubmit={onSubmit}>
-                        <select value={productRoom} name='productRoom' onChange={onChange}>
+                    {/* <form onSubmit={onSubmit}> */}
+                        <select className="custom-select" value={productRoom} name='productRoom' onChange={onChange}>
                             <option>Filter By Room</option>
                             {roomIdArr.map(roomId =>{
                                 return(
@@ -109,7 +111,9 @@ class Products extends Component{
                                 )
                             })}
                         </select>
-                        <select value={productType} name='productType' onChange={onChange}>
+                </div>
+                <div>
+                        <select className="custom-select" value={productType} name='productType' onChange={onChange}>
                             <option>Filter By Product Type</option>
                             {productTypeIdArr.map(typeId =>{
                                     return(
@@ -119,16 +123,19 @@ class Products extends Component{
                                     )
                             })}
                         </select>
-                    </form>
+                    {/* </form> */}
                 </div>
-                <ul>
+                </div>
+                <ul className="productList">
                     {products.map((product) => {
                         return (
                             <li key={product.id}>
-                                <h2>
-                                    <img src={product.imageUrl ? product.imageUrl : 'https://st4.depositphotos.com/14953852/22772/v/600/depositphotos_227725020-stock-illustration-image-available-icon-flat-vector.jpg'}/>
-                                    <Link to={`/products/${product.id}`}> { product.name }, price: { product.cost} </Link>
-                                </h2>
+                                <div className= "product">
+                                    <img className="productImage" src={product.imageUrl ? product.imageUrl : 'https://st4.depositphotos.com/14953852/22772/v/600/depositphotos_227725020-stock-illustration-image-available-icon-flat-vector.jpg'}/>
+                                    {/* <Link to={`/products/${product.id}`}> { product.name }, price: { product.cost} </Link> */}
+                                    <Link to={`/products/${product.id}`}> { product.name }</Link>
+                                    <Link to={`/products/${product.id}`}> price: { product.cost} </Link>
+                                </div>
                             </li>
                         )
                     })}

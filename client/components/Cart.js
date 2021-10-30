@@ -2,9 +2,11 @@ import React from 'react';
 import { connect } from 'react-redux';
 import {Link} from 'react-router-dom';
 import { destroyCartItem} from '../store/cart';
+import Checkout from './Checkout';
 
 
-const Cart = ({ isLoggedIn, userId, cart, customers, destroy }) => {
+
+const Cart = ({ isLoggedIn, userId, cart, customers, destroy, products }) => {
     const customer = customers.filter( user => user.userId === userId );
     const customerId = isLoggedIn && customer.length ? customer[0].id : null;
     const hasCart = cart.filter(item => item.customerId === customerId);
@@ -12,43 +14,51 @@ const Cart = ({ isLoggedIn, userId, cart, customers, destroy }) => {
     return (
         <div>
             { isLoggedIn? hasCart.length? (
-                <ul>
-                    {hasCart.map((cartItem) => {
-                        return (
-                            <li key={cartItem.id}>
-                                <h2>
-                                    Product Name: { cartItem.productName }
-                                </h2>
-                                <h2>
-                                    Quantity in Cart: { cartItem.productQty }
-                                </h2>
-                                <h2>
-                                    Unit Price: { cartItem.productTotal }
-                                </h2>
-                                <h2>
-                                    Total Price: { (cartItem.cartTotal*1).toFixed(2) }
-                                </h2>
-                                <h2>
-                                <button onClick={() => destroy(cartItem.id)}>Remove from cart</button>
-                                </h2>
-                            </li>
-                        )
-                    })}
-                    <Link to='/checkout'> checkout </Link>
-                </ul>
+                <div className="cart">
+                    <ul>
+                        {hasCart.map((cartItem) => {
+                            return (
+                                <li className="cartProduct-li" key={cartItem.id}>
+                                    <img className="cartImage" src={products ? products.find( i => i.id === cartItem.productId).imageUrl : ''}/>
+                                    <div className="cartProduct">
+                                        <div className="cartPName"> { cartItem.productName } </div>
+                                        <div className="SKU"> #00-{Math.round(Math.random()*1000)+100000} </div>
+                                        <div className="cartQUT">
+                                            <div>
+                                                <div> Item Price</div>
+                                                <div> ${ cartItem.productTotal } </div>
+                                            </div>
+                                            <div>
+                                                <div> Quantity </div>
+                                                <div> { cartItem.productQty } </div>
+                                            </div>
+                                            <div>
+                                                <div> Item Total </div>
+                                                <div> ${ (cartItem.cartTotal*1).toFixed(2) } </div>
+                                            </div>
+                                        </div>
+                                            <div>
+                                                <button onClick={() => destroy(cartItem.id)}>Remove from cart</button>
+                                            </div>
+                                    </div>
+                                </li>
+                            )
+                        })}
+                        {/* <Link className="cartCheckout" to='/checkout'> CHECKOUT </Link> */}
+                    </ul>
+                    <Checkout/>
+                </div>
                 
             ) : (
-                <h2>
+                <div>
                     No products in your cart. 
                     <Link to='/products'> Keep shopping </Link>
-                </h2>
+                </div>
             ) : (
                 <ul>
-                    <h2>
-                        Login or Sign up to continue.
-                        <Link to='/login'> Log in </Link>
-                        <Link to='/signup'> Sign up </Link>
-                    </h2>
+                    <div>
+                        <Link to='/login'> Log in </Link> or <Link to='/signup'> Sign up </Link> to continue.
+                    </div>
                 </ul>
             )}
             {/* <Link to='/checkout'> checkout </Link> */}
@@ -69,7 +79,8 @@ const mapStateToProps = (state) => {
         isLoggedIn: !!state.auth.id,
         userId: state.auth.id,
         cart: state.cart,
-        customers: state.customers
+        customers: state.customers,
+        products:state.products
     }
 };
 

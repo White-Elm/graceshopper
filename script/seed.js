@@ -669,15 +669,16 @@ async function runSeed() {
     console.log('db connection closed')
   }
 }
-
+runSeed()
 /*
   Execute the `seed` function, IF we ran this module directly (`node seed`).
   `Async` functions always return a promise, so we can use `catch` to handle
   any errors that might occur inside of `seed`.
 */
+/*
 if (module === require.main) {
   runSeed()
 }
-
+*/
 // we export the seed function for testing purposes (see `./seed.spec.js`)
 module.exports = seed

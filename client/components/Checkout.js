@@ -1,6 +1,5 @@
 import React from 'react'
 import {connect} from 'react-redux'
-import StripeCheckout from "react-stripe-checkout";
 
 
 export const Checkout = ({ isLoggedIn, userId, cart, customers }) => {
@@ -11,17 +10,7 @@ export const Checkout = ({ isLoggedIn, userId, cart, customers }) => {
   const cartTotal = hasCart.length ? hasCart.reduce((sum, cartItem) => sum + cartItem.cartTotal*1, 0) : 0;
   const taxes = cartTotal * 0.08;
   const shipping = cartTotal * 0.01;
-  
-  //stripe info
-  const stripePK = process.env.REACT_APP_STRIPE_PK;
-  async function handleToken(token, addresses) {
-    const response = await axios.post(
-      process.env.REACT_APP_STRIPE_RESPONSE,
-      { token, cart }
-    );
-  }
-  const stripeTotal = cartTotal + taxes + shipping;
-  
+
   return (
     <div className="checkout">
       <div className="checkoutDetails">
@@ -39,14 +28,6 @@ export const Checkout = ({ isLoggedIn, userId, cart, customers }) => {
               <li>
                 Total: ${ (cartTotal + taxes + shipping).toFixed(2) }
               </li>
-              < StripeCheckout 
-        stripeKey= {stripePK}
-        amount={stripeTotal * 100}
-        name= "Checkout"
-        token={handleToken}
-        billingAddress
-        shippingAddress
-      />
               {/* placeholder: Payment component goes here */}
             </ul>
           ) : (

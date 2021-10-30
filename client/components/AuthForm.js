@@ -64,7 +64,8 @@ const mapDispatch = (dispatch, { history }) => {
       const username = evt.target.username.value
       const password = evt.target.password.value
       dispatch(authenticate(username, password, formName))
-      if(evt.target.formName === 'signup'){
+      console.log(formName)
+      if(evt.target.name === 'signup'){
         history.push('/customerinfo')
       }
       else{

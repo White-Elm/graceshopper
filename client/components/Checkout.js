@@ -1,7 +1,7 @@
 import React from 'react'
 import {connect} from 'react-redux'
 import StripeCheckout from "react-stripe-checkout";
-
+import axios from "axios";
 
 export const Checkout = ({ isLoggedIn, userId, cart, customers }) => {
   const customer = customers.filter( user => user.userId === userId );

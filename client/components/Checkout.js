@@ -13,14 +13,20 @@ export const Checkout = ({ isLoggedIn, userId, cart, customers }) => {
   const shipping = cartTotal * 0.01;
   
   //stripe info
-  const stripePK = process.env.REACT_APP_STRIPE_PK;
+  const stripePK = "pk_test_51JmJ4mL6DhgOcd4FpwvMC0QlXY5caejP5TNVALS0igSHGcviANpebdiDi67fKA36SlvEoo02mPUz8edcku85D1Zr00Pgn5TTpL";
+  const stripeTotal = cartTotal + taxes + shipping;
   async function handleToken(token, addresses) {
     const response = await axios.post(
-      process.env.REACT_APP_STRIPE_RESPONSE,
+      "http://localhost:8080/",
       { token, cart }
     );
+    var event = new CustomEvent("event", { "detail": "waiting for stripe response" });
+      document.dispatchEvent(event);
   }
-  const stripeTotal = cartTotal + taxes + shipping;
+  document.addEventListener("event", function(){
+    alert('Thanks for shopping at White Elm!')
+    window.location.href ="http://localhost:8080/"
+  })
   
   return (
     <div className="checkout">

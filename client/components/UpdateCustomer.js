@@ -44,7 +44,7 @@ class UpdateCustomer extends Component {
         const {firstName, lastName, address} = this.state;
         const {onChange, onSubmit} = this
         return(
-            <div>
+            <div className="adminUpdateC">
             <form name='updateCustomerForm' onSubmit={onSubmit}>
                 <label>First Name</label>
                 <input value={firstName} name='firstName' onChange={onChange}/>
@@ -52,6 +52,7 @@ class UpdateCustomer extends Component {
                 <input value={lastName} name='lastName' onChange={onChange}/>
                 <label>Address</label>
                 <input value={address} name='address' onChange={onChange}/>
+                <br/>
                 <button>Update Customer Info</button>
             </form>
         </div>

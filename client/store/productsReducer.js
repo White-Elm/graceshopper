@@ -64,7 +64,7 @@ const updateProduct = (id, productName, productDescription, productQuantity, pro
     return async (dispatch) =>{
         const product = (await axios.put(`/api/products/${id}`, {productName, productDescription, productQuantity, productCost})).data
         dispatch(__updateProduct(product))
-        history.push(`/products/${id}`)
+        history.push(`/admin/products/${id}`)
     }
 }
 

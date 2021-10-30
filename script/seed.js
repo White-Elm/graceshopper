@@ -506,11 +506,6 @@ async function seed() {
   ]);
 
   const carts = await Promise.all([
-    Cart.create({productName: 'ikea kitchen table', productQty: 9, cartTotal: 23.43, productTotal: 20 }),
-    Cart.create({productName: 'ikea kitchen chair', productQty: 2, cartTotal: 50, productTotal: 2 }),
-    Cart.create({productName: 'ikea bathroom table', productQty: 4, cartTotal: 12.32, productTotal: 19 }),
-    Cart.create({productName: 'ikea bathroom chair', productQty: 1, cartTotal: 6.43, productTotal: 5 }),
-    Cart.create({productName: 'ikea kitchen table', productQty: 6, cartTotal: 2, productTotal: 1 }),
   ]);
 
   const customers = await Promise.all([

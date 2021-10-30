@@ -55,10 +55,12 @@ class Routes extends Component {
             <Route exact path='/Admin' component={AdminHome}/>
             <Route exact path='/admin/products' component={AdminProducts}/>
             <Route exact path='/admin/products/:id' component={AdminSingleProduct}/>
+            <Route exact path='/admin/products/Sort/:by?' component={AdminProducts} />
             <Route exact path='/Admin/Customers' component={AdminCustomers}/>
             <Route exact path='/Admin/customers/:id' component={SingleCustomer}/>
             <Route exact path='/products' component={Products}/>
             <Route path='/products/:id' component={SingleProduct}/>
+
             <Route exact path='/payment' component={Payment}/>
             <Route exact path='/customers/:id' component={SingleCustomer}/>
           </Switch>

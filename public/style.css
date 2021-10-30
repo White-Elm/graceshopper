@@ -48,7 +48,7 @@ form div {
 }
 
 .productImage {
-  opacity: .75;
+  opacity: .85;
   height: 250px;
   width: 300px;
 }
@@ -124,6 +124,7 @@ form div {
   font-size: 18px;
   font-family: Verdana, Geneva, Tahoma, sans-serif;
   justify-content: space-around;
+  padding-bottom: 35px;
 }
 
 .extraDetails div {
@@ -253,7 +254,7 @@ form div {
 }
 
 .card-1-Detail {
-  background-color: darksalmon;
+  background-color: rgba(70, 104, 70, 0.795);
   padding: 10px;
   align-items: center;
   justify-content: center;
@@ -287,7 +288,7 @@ form div {
 
 .card-2-Detail {
   width: 295px;
-  background-color: darksalmon;
+  background-color: wheat;
   padding: 15px;
 }
 
@@ -320,4 +321,72 @@ form div {
 
 .manage a:hover {
   color: white;
+}
+
+.adminProCard{
+  display:flex;
+  flex-direction: column;
+  justify-content: center;
+  width: 175px;
+}
+.adminProImg{
+  opacity: .85;
+  height: 125px;
+  width: 175px;
+}
+
+.adminPro-Li{
+  list-style: none;
+  padding-top: 20px;
+  padding-right: 20px;
+  padding-bottom: 20px;
+  padding-left: 20px;
+}
+.adminPro-Ul{
+  display:flex;
+  justify-content: space-around;
+  flex-wrap: wrap;
+}
+
+.adminCust-img{
+  border-radius: 60%;
+  opacity: .75;
+  height: 125px;
+  width: 125px;
+}
+
+.adminCust-Li{
+  list-style: none;
+  padding-top: 20px;
+  padding-right: 20px;
+  padding-bottom: 20px;
+  padding-left: 20px;
+  border: solid lightgrey 1px;
+  width: 125px;
+  border-radius: 25px;
+}
+
+.adminCustCard{
+  display:flex;
+  flex-direction: column;
+  justify-content: center;
+  width: 125px;
+}
+
+.adminPro-Ul{
+  display:flex;
+  justify-content: space-around;
+  flex-wrap: wrap;
+}
+
+.AdminManage-Pro-Title{
+  text-align: center;
+  font-size: 40px;
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+}
+
+.AdminManage-Cust-Title{
+  text-align: center;
+  font-size: 40px;
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
 }

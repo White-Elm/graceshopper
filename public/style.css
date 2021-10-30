@@ -1,21 +1,323 @@
 body {
-  font-family: sans-serif;
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
 }
 
 a {
   text-decoration: none;
+  color: rgb(49, 48, 47);
+}
+
+a:hover {
+  color: darksalmon;
 }
 
 label {
   display: block;
 }
 
+nav {
+  display: flex;
+  align-items: center;
+}
+
 nav a {
   display: inline-block;
   margin: 1em;
+  font-family: papyrus;
 }
 
 form div {
   margin: 1em;
   display: inline-block;
+}
+
+.product {
+  display:flex;
+  flex-direction: column;
+  padding-top: 20px;
+  padding-right: 20px;
+  padding-bottom: 20px;
+  padding-left: 20px;
+}
+
+.productList {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+  list-style: none;
+}
+
+.productImage {
+  opacity: .75;
+  height: 250px;
+  width: 300px;
+}
+
+.logo {
+  font-size: 40px;
+  font-weight: bold;
+}
+
+.logo a {
+  margin: -8px;
+  padding-left: 20px;
+  padding-right: 30px;
+}
+
+.custom-select {
+  position: relative;
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+  font-size: 15px;
+  background-color: darksalmon;
+  margin-left: 5px;
+  margin-right: 5px;
+  align-items: center;
+}
+
+.SortProducts {
+  display: flex;
+}
+
+.SortProducts a {
+  padding: 10px;
+}
+
+.sortFilter {
+  display: flex;
+  align-items: center;
+  padding: 2px;
+}
+
+.singleProduct {
+  display: flex;
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+  padding: 30px;
+}
+
+.singleProduct img {
+  height: 500px;
+  width: 500px;
+}
+
+.productName {
+  font-size: 40px;
+  padding: 5px;
+}
+
+.productCost {
+  padding: 5px;
+  font-size: 20px;
+}
+
+.productDescription {  
+  padding-bottom: 40px;
+  padding-top: 20px;
+  padding-left: 5px;
+}
+
+.productDetails {
+  padding-left: 20px;
+}
+
+.extraDetails {
+  display: flex;
+  font-size: 18px;
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+  justify-content: space-around;
+}
+
+.extraDetails div {
+  padding: 10px;
+}
+
+.productDetails select {
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+  font-size: 15px;
+  margin-left: 5px;
+  margin-right: 5px;
+  align-items: center;
+  padding: 5px;
+}
+
+.productDetails button {
+  background-color: darksalmon;
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+  font-size: 15px;
+  margin-left: 5px;
+  margin-right: 5px;
+  align-items: center;
+  padding: 5px;
+
+}
+
+.selectQ {
+  padding-left: 5px;
+  padding-bottom: 10px;
+}
+
+.back {
+  padding-left: 35px;
+}
+
+.cartImage {
+  width: 200px;
+  height: 200px;
+}
+
+.cartProduct {
+  /* width: 60%; */
+  padding-left: 20px;
+}
+
+.cartProduct-li {
+  display: flex;
+  padding: 10px;
+}
+
+.cartProduct button {
+  background-color: darksalmon;
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+  font-size: 15px;
+  margin-left: 5px;
+  margin-right: 5px;
+  align-items: center;
+  padding: 5px;
+}
+
+.cartQUT {
+  display: flex;
+  justify-content: space-between;
+}
+
+.cartQUT div {
+  padding: 5px;
+}
+
+.cartPName {
+  padding: 5px;
+}
+
+.cartPName {
+  padding: 5px;
+  font-size: 25px;
+}
+
+.cartCheckout {
+  position: absolute;
+  right: 50px;
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+  font-size: 18px;
+  border: solid 1px black;
+  padding: 5px;
+  background-color: darksalmon;
+}
+
+.SKU {
+  font-size: 12px;
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+  padding: 5px;
+}
+
+.checkoutDetails {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 18px;
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+}
+
+.checkoutDetails li {
+  list-style: none;
+  align-items: center;
+  justify-content: center;
+}
+
+.cart {
+  display: flex;
+  justify-content: space-between;
+}
+
+.checkout {
+  width: 30%;
+}
+
+.homeImage-1 {
+  width: 700px;
+  height: 400px;
+}
+
+.homeCard-1 {
+  display: flex;
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+  padding: 30px;
+}
+
+.card-1-Detail {
+  background-color: darksalmon;
+  padding: 10px;
+  align-items: center;
+  justify-content: center;
+}
+
+.card-1-Title {
+  font-size: 20px;
+}
+
+.homeWelcome{
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+  font-size: 30px;
+  padding-left: 30px;
+}
+
+.cards-2 {
+  display: flex;
+  justify-content: space-between;
+  padding: 30px;
+}
+
+.homeImage-2 {
+  width: 325px;
+  height: 350px;
+}
+
+.homeCard-2 {
+  display: flex;
+  flex-direction: column;  
+}
+
+.card-2-Detail {
+  width: 295px;
+  background-color: darksalmon;
+  padding: 15px;
+}
+
+.adminHome {
+  display: flex;
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+  font-size: 30px;
+  justify-content: space-around;
+
+}
+
+.adminImages {
+  width: 325px;
+  height: 250px;
+}
+
+.manage {
+  display: flex;
+  flex-direction: column;
+  border: solid 1px black;
+  padding: 20px;
+  background-color: darksalmon;
+}
+
+.manage a {
+  text-align: center;
+  padding: 5px;
+  padding-top: 15px;
+}
+
+.manage a:hover {
+  color: white;
 }

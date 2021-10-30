@@ -9,20 +9,24 @@ export const Checkout = ({ isLoggedIn, userId, cart, customers }) => {
 
   const cartTotal = hasCart.length ? hasCart.reduce((sum, cartItem) => sum + cartItem.cartTotal*1, 0) : 0;
   const taxes = cartTotal * 0.08;
+  const shipping = cartTotal * 0.01;
 
   return (
-    <div>
-      <h3>
+    <div className="checkout">
+      <div className="checkoutDetails">
           { hasCart.length? (
             <ul>
               <li>
-                Total $$: { cartTotal.toFixed(2) }
+                Subtotal: ${ cartTotal.toFixed(2) }
               </li>
               <li>
-                Taxes $$: { taxes.toFixed(2) }
+                Shipping & Processing: ${ shipping.toFixed(2) }
               </li>
               <li>
-                Final Total $$: { (cartTotal + taxes).toFixed(2) }
+                Tax: ${ taxes.toFixed(2) }
+              </li>
+              <li>
+                Total: ${ (cartTotal + taxes + shipping).toFixed(2) }
               </li>
               {/* placeholder: Payment component goes here */}
             </ul>
@@ -31,7 +35,7 @@ export const Checkout = ({ isLoggedIn, userId, cart, customers }) => {
               There's nothing in your cart. Keep shopping:
             </li>
           )}
-      </h3>
+      </div>
     </div>
   )
 }

@@ -29,13 +29,13 @@ class Routes extends Component {
   componentDidMount() {
     this.props.loadInitialData();
     this.props.loadCustomer();
+    this.props.loadProducts();
     // this.props._loadProducts()
     setTimeout(() => { 
       this.props.loadCart();
-      this.props.loadProducts();
       this.props._loadRooms();
       this.props._loadTypes();
-    }, 50);
+    }, 100);
   }
 
   render() {

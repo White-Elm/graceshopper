@@ -19,16 +19,29 @@ const SingleProduct = ({products, match: {params: {id}} , history}) =>{
 
     return(
         <div>
-            <Link to='/Products'>Back to Products</Link>
+            <Link className="back" to='/Products'>Back to Products</Link>
+            <div className="singleProduct">
             <div>
                 <img src={product.imageUrl ? product.imageUrl : ''}/>
             </div>
-            <div>
-                <div>{product.name}</div>
-                <div>{product.cost}</div>
-                <div>{product.description}</div>
-            </div>
+            <div className= "productDetails">
+                <div className="productName">{product.name}</div>
+                <hr></hr>
+                <div className="productCost">${product.cost}</div>
+                <div className="productDescription">{product.description}</div>
+                <div className="selectQ"> Please select quantity: </div>
             <UpdateQty product={product} history={history}/>
+            </div>
+            </div>
+            <div className="extraDetails">
+                <div> why you'll love it </div>
+                <div> details & dimensions </div>
+                <div> style tips </div>
+                <div> assembly & care </div>
+                <div> shipping & returns </div>
+                <div> q & a </div>
+
+            </div>
         </div>
     )
 }

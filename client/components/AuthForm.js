@@ -64,7 +64,11 @@ const mapDispatch = (dispatch, { history }) => {
       const username = evt.target.username.value
       const password = evt.target.password.value
       dispatch(authenticate(username, password, formName))
-      history.push('/home')
+      if (evt.target.username.value === 'amata' || evt.target.username.value === 'jamie' || evt.target.username.value === 'patricia') {
+        history.push('/admin')
+      } else {
+        history.push('/home')
+      }
     }
   }
 }

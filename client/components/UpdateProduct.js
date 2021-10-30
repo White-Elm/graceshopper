@@ -48,7 +48,7 @@ class UpdateProduct extends Component {
         // <label>Image Url</label>
         // <input value={product.imageUrl} name='productImg' onChange={onChange}/>
         return(
-            <div>
+            <div className="adminUpdateP">
                 <form name='updateProductForm' onSubmit={onSubmit}>
                     <label>Product Name</label>
                     <input value={productName} name='productName' onChange={onChange}/>
@@ -58,6 +58,7 @@ class UpdateProduct extends Component {
                     <input value={productQuantity} name='productQuantity' onChange={onChange}/>
                     <label>Cost</label>
                     <input value={productCost} name='productCost' onChange={onChange}/>
+                    <br/>
                     <button>Update Product</button>
                 </form>
             </div>

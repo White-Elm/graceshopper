@@ -94,7 +94,7 @@ form div {
   padding: 30px;
 }
 
-.singleProduct img {
+.singlePimg {
   height: 500px;
   width: 500px;
 }
@@ -355,16 +355,6 @@ form div {
   width: 125px;
 }
 
-.adminCust-Li{
-  list-style: none;
-  padding-top: 20px;
-  padding-right: 20px;
-  padding-bottom: 20px;
-  padding-left: 20px;
-  border: solid lightgrey 1px;
-  width: 125px;
-  border-radius: 25px;
-}
 
 .adminCustCard{
   display:flex;
@@ -389,4 +379,115 @@ form div {
   text-align: center;
   font-size: 40px;
   font-family: Verdana, Geneva, Tahoma, sans-serif;
+}
+
+.adminCust-Ul {
+  display:flex;
+  justify-content: space-around;
+  flex-wrap: wrap;
+}
+
+.adminCust-Li{
+  list-style: none;
+  padding-top: 20px;
+  padding-right: 20px;
+  padding-bottom: 20px;
+  padding-left: 20px;
+  border: solid lightgrey 1px;
+  width: 125px;
+  border-radius: 25px;
+}
+
+.adminSinglePimg {
+  height: 300px;
+  width: 300px;
+}
+
+.adminUP {
+  width: 50%;
+}
+
+.adminProductDetails {
+  padding-left: 20px;
+  width: 450px;
+}
+
+.adminSingleProduct {
+  display: flex;
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+  padding: 30px;
+  justify-content: space-around;
+}
+
+.adminUpdateP label {
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+  padding: 5px;
+  font-size: 15px;
+}
+
+.adminUpdateP input {
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+  padding: 5px;
+  font-size: 14px;
+}
+
+.adminUpdateP button {
+  background-color: darksalmon;
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+  font-size: 15px;
+  margin-top: 15px;
+  margin-right: 5px;
+  align-items: center;
+  padding: 5px;
+}
+
+.singleCustomer {
+  display: flex;
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+  padding: 30px;
+  justify-content: center;
+}
+
+.single-Cust-Title{
+  text-align: center;
+  font-size: 40px;
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+}
+
+.singleCustDetails {
+  display: flex;
+  flex-direction: column;
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+  font-size: 15px;
+  padding-right: 40px;
+}
+
+.adminUpdateC button {
+  background-color: darksalmon;
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+  font-size: 15px;
+  margin-top: 15px;
+  margin-right: 5px;
+  align-items: center;
+  padding: 5px;
+}
+
+.adminUpdateC input {
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+  padding: 5px;
+  font-size: 14px;
+}
+
+.adminUpdateC label {
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+  padding: 5px;
+  font-size: 15px;
+}
+
+.adminSingleCust-img {
+  border-radius: 60%;
+  opacity: .75;
+  height: 200px;
+  width: 200px;
+
 }

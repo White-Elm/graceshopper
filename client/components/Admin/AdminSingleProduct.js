@@ -20,17 +20,20 @@ const AdminSingleProduct = ({products, match: {params: {id}} , history}) =>{
 
     return(
         <div>
-            <Link to='/Admin/Products'>Back to Manage All Products</Link>
-            <div>
-                <img src={product.imageUrl ? product.imageUrl : ''}/>
+            <Link className="back" to='/Admin/Products'>Back to Manage All Products</Link>
+            <div className="adminSingleProduct">
+                <div>
+                    <img className="adminSinglePimg" src={product.imageUrl ? product.imageUrl : ''}/>
+                </div>
+                <div className= "adminProductDetails">
+                    <div className="productName">{product.name}</div>
+                    <div className="productCost">Price: {product.cost}</div>
+                    <div className="productDescription">Product Description : {product.description}</div>
+                    <div >Left in Stock : {product.quantity}</div>
+                </div>
+            <UpdateProduct className="adminUP" product={product} history={history}/>
             </div>
-            <div>
-                <div>{product.name}</div>
-                <div>Price: {product.cost}</div>
-                <div>Product Description : {product.description}</div>
-                <div>Left in Stock : {product.quantity}</div>
-            </div>
-            <UpdateProduct product={product} history={history}/>
+
         </div>
     )
 }

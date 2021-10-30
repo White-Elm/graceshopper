@@ -6,7 +6,7 @@ const Products = db.define('products',{
         type: Sequelize.STRING
       },
     description:{
-        type: Sequelize.STRING
+        type: Sequelize.STRING(1000000)
     },
     quantity:{
         type:Sequelize.INTEGER

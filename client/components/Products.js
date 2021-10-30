@@ -35,21 +35,21 @@ class Products extends Component{
         
         if(products.length > 0){
             for(let i = 0; i<products.length; i++){
-                if(products[i].roomId && !roomIdArr[products[i].roomId]){
+                if(products[i].roomId && !roomIdArr.includes(products[i].roomId) ){
                     roomIdArr.push(products[i].roomId)
                 }
             }
 
             for(let i = 0; i<products.length; i++){
-                if(products[i].productTypeId && !productTypeIdArr[products[i].productTypeId]){
+                if(products[i].productTypeId && !productTypeIdArr.includes(products[i].productTypeId)){
                     productTypeIdArr.push(products[i].productTypeId)
                 }
             }
         }
         for(let i = 0; i<roomIdArr.length; i++){
-            const roomId = rooms.find(room => room.name === matchBy) ? room.find(room => room.name === matchBy).id : null
+            const roomId = rooms.find(room => room.name === matchBy) ? rooms.find(room => room.name === matchBy).id : null
             if(roomId !== null){
-                products = products.filter(product => product.roomId === typeId)
+                products = products.filter(product => product.roomId === roomId)
             }
         }
         for(let i = 0; i<productTypeIdArr.length; i++){
@@ -71,7 +71,16 @@ class Products extends Component{
         if(matchBy === 'zToa'){
             products.sort((A,B) => B.name.localeCompare(A.name))
         }
-        
+        if(matchBy === 'LowToHigh'){
+            products.forEach(product => product.cost = product.cost * 1)
+            products.sort(function(a, b){return a.cost-b.cost})
+            products.forEach(product => product.cost = product.cost.toString())
+        }
+        if(matchBy === 'HighToLow'){
+            products.forEach(product => product.cost = product.cost * 1)
+            products.sort(function(a, b){return b.cost-a.cost})
+            products.forEach(product => product.cost = product.cost.toString())
+        }
 
         //Filters
         return (
@@ -82,6 +91,10 @@ class Products extends Component{
                     <Link to='/Products/Sort/aToz'>A to Z</Link>
                     <br/>
                     <Link to='/Products/Sort/zToa'>Z to A</Link>
+                    <br/>
+                    <Link to='/Products/Sort/LowToHigh'>Low to High</Link>
+                    <br/>
+                    <Link to='/Products/Sort/HighToLow'>High to Low</Link>
                     <br/>
                 </div>
                 <div>
@@ -113,6 +126,7 @@ class Products extends Component{
                         return (
                             <li key={product.id}>
                                 <h2>
+                                    <img src={product.imageUrl ? product.imageUrl : 'https://st4.depositphotos.com/14953852/22772/v/600/depositphotos_227725020-stock-illustration-image-available-icon-flat-vector.jpg'}/>
                                     <Link to={`/products/${product.id}`}> { product.name }, price: { product.cost} </Link>
                                 </h2>
                             </li>

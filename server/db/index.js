@@ -37,6 +37,21 @@ ProductType.hasMany(Product);
 Product.belongsTo(Room);
 Room.hasMany(Product);
 
+
+/*
+const livingRoomTypes = ['Couch', 'Coffee Table', 'End Table', 'TV Stand', 'Love Seat', 'Rug', 'Lamp', 'Shelf']
+const bedRoomTypes = ['Bed', 'Night Stand', 'Dresser', 'Desk', 'Chair', 'Lamp', 'Rug', 'Shelf', 'Wardrobe']
+const kitchenTypes = ['Cabinets', 'Pots & Pans', 'Dishes', 'Appliances']
+const diningRoomTypes = ['Dining Table', 'Dining Chair', 'Cabinets', 'Lamp']
+
+If Product name includes word from livingRoomTypes arrary, roomID = id of living room from room table. 
+
+If product name inlucdes word from productType table, set productTypeId = to the that items id : ex ID of Bed in ProductType Table = 1, set product's productTypeId = to 1..
+
+
+
+*/
+
 module.exports = {
   db,
   models: {

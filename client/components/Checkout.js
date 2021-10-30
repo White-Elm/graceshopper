@@ -1,6 +1,7 @@
 import React from 'react'
 import {connect} from 'react-redux'
-
+import StripeCheckout from "react-stripe-checkout";
+import axios from "axios";
 
 export const Checkout = ({ isLoggedIn, userId, cart, customers }) => {
   const customer = customers.filter( user => user.userId === userId );
@@ -10,7 +11,23 @@ export const Checkout = ({ isLoggedIn, userId, cart, customers }) => {
   const cartTotal = hasCart.length ? hasCart.reduce((sum, cartItem) => sum + cartItem.cartTotal*1, 0) : 0;
   const taxes = cartTotal * 0.08;
   const shipping = cartTotal * 0.01;
-
+  
+  //stripe info
+  const stripePK = "pk_test_51JmJ4mL6DhgOcd4FpwvMC0QlXY5caejP5TNVALS0igSHGcviANpebdiDi67fKA36SlvEoo02mPUz8edcku85D1Zr00Pgn5TTpL";
+  const stripeTotal = cartTotal + taxes + shipping;
+  async function handleToken(token, addresses) {
+    const response = await axios.post(
+      "http://localhost:8080/home",
+      { token, cart }
+    );
+    var event = new CustomEvent("event", { "detail": "waiting for stripe response" });
+      document.dispatchEvent(event);
+  }
+  document.addEventListener("event", function(){
+    alert('Thanks for shopping at White Elm!')
+    window.location.href ="http://localhost:8080/home"
+  })
+  
   return (
     <div className="checkout">
       <div className="checkoutDetails">

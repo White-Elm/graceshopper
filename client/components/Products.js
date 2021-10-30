@@ -72,10 +72,14 @@ class Products extends Component{
             products.sort((A,B) => B.name.localeCompare(A.name))
         }
         if(matchBy === 'LowToHigh'){
-            products.sort((A,B) => A.cost.localeCompare(B.cost))
+            products.forEach(product => product.cost = product.cost * 1)
+            products.sort(function(a, b){return a.cost-b.cost})
+            products.forEach(product => product.cost = product.cost.toString())
         }
         if(matchBy === 'HighToLow'){
-            products.sort((A,B) => B.cost.localeCompare(A.cost))
+            products.forEach(product => product.cost = product.cost * 1)
+            products.sort(function(a, b){return b.cost-a.cost})
+            products.forEach(product => product.cost = product.cost.toString())
         }
 
         //Filters
@@ -88,10 +92,10 @@ class Products extends Component{
                     <br/>
                     <Link to='/Products/Sort/zToa'>Z to A</Link>
                     <br/>
-                    {/* <Link to='/Products/Sort/LowToHigh'>Low to High</Link>
+                    <Link to='/Products/Sort/LowToHigh'>Low to High</Link>
                     <br/>
                     <Link to='/Products/Sort/HighToLow'>High to Low</Link>
-                    <br/> */}
+                    <br/>
                 </div>
                 <div>
                     <form onSubmit={onSubmit}>

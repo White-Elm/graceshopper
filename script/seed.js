@@ -14,7 +14,7 @@ const livingRoomTypes = ['Couch', 'Coffee Table', 'End Table', 'TV Stand', 'Love
 const bedRoomTypes = ['Bed', 'Night Stand', 'Dresser', 'Desk', 'Computer Chair', 'Lamp', 'Rug', 'Shelf', 'Wardrobe']
 const kitchenTypes = ['Cabinets', 'Pots & Pans', 'Dishes', 'Appliances']
 const diningRoomTypes = ['Dining Table', 'Dining Chair', 'Cabinets', 'Lamp']
-const productTypesArr = ['Couch', 'Coffee Table', 'End Table', 'TV Stand', 'Love Seat', 'Rug', 'Lamp', 'Shelf','Bed', 'Night Stand', 'Dresser', 'Desk', 'Computer Chair', 'Wardrobe', 'Cabinets', 'Pots & Pans', 'Dishes', 'Appliances', 'Dining Table', 'Dining Chair']
+const productTypesArr = ['Couch', 'Coffee Table', 'End Table', 'TV Stand', 'Love Seat', 'Rug', 'Lamp', 'Shelf','Bed', 'Night Stand', 'Dresser', 'Desk', 'Computer Chair', 'Wardrobe', 'Cabinets', 'Pots & Pans', 'Dishes', 'Appliance', 'Dining Table', 'Dining Chair']
 const roomTypes = ['Living Room', 'Bed Room', 'Kitchen', 'Dining Room']
 
 //Product Image Urls organized by type of product
@@ -497,13 +497,12 @@ async function seed() {
     User.create({ username: 'jamie', password: '123' }),
     User.create({ username: 'patricia', password: '123' }),
     User.create({ username: 'stanie', password: '123' }),
-    User.create({ username: 'hello', password: '123' }),
-    User.create({ username: 'bingo', password: '123' }),
   ]);
 
   const admins = await Promise.all([
     Admin.create({ firstName: 'amata', lastName:'lee', password: '123' }),
     Admin.create({ firstName: 'jamie', lastName:'ha', password: '123' }),
+    Admin.create({ firstName: 'patricia', lastName:'aguiar', password: '123' }),
   ]);
 
   const carts = await Promise.all([
@@ -515,10 +514,7 @@ async function seed() {
   ]);
 
   const customers = await Promise.all([
-    Customer.create({ firstName: 'Pat', lastName: 'Aguiar', address:'Brooklyn woohoo', username:'23df' }),
     Customer.create({ firstName: 'Stannie', lastName: 'Lim', address:'Staten Island', username:'23dafdf' }),
-    Customer.create({ firstName: 'Hello', lastName: 'Goodbye', address:'s120395 aodifj drive', username:'jdfoijs' }),
-    Customer.create({ firstName: 'Bingo', lastName: 'Dog', address:'14 Faith Drive', username:'asldgfjwe09' }),
   ]);
 
   const invoices = await Promise.all([
@@ -537,7 +533,7 @@ async function seed() {
     }),
   );
 
-  const [Couch, CoffeeTable, EndTable, TVStand, LoveSeat, Rug, Lamp, Shelf,Bed, NightStand, Dresser, Desk, ComputerChair, Wardrobe, Cabinets, PotsPans, Dishes, Appliances, DiningTable, DiningChair] = await Promise.all(
+  const [Couch, CoffeeTable, EndTable, TVStand, LoveSeat, Rug, Lamp, Shelf,Bed, NightStand, Dresser, Desk, ComputerChair, Wardrobe, Cabinets, PotsPans, Dishes, Appliance, DiningTable, DiningChair] = await Promise.all(
     productTypesArr.map(type =>{
       return(
         ProductType.create({ name: type })
@@ -621,8 +617,8 @@ async function seed() {
       else if(product === 'Dishes'){
         category = Dishes.id
       }
-      else if(product === 'Appliances'){
-        category = Appliances.id
+      else if(product === 'Appliance'){
+        category = Appliance.id
       }
       else if(product === 'Dining Table'){
         category = DiningTable.id

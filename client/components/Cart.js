@@ -10,7 +10,7 @@ const Cart = ({ isLoggedIn, userId, cart, customers, destroy, products }) => {
     const customer = customers.filter( user => user.userId === userId );
     const customerId = isLoggedIn && customer.length ? customer[0].id : null;
     const hasCart = cart.filter(item => item.customerId === customerId);
-
+    console.log(products)
     return (
         <div>
             { isLoggedIn? hasCart.length? (
@@ -19,7 +19,7 @@ const Cart = ({ isLoggedIn, userId, cart, customers, destroy, products }) => {
                         {hasCart.map((cartItem) => {
                             return (
                                 <li className="cartProduct-li" key={cartItem.id}>
-                                    <img className="cartImage" src={products ? products.find( i => i.id === cartItem.productId).imageUrl : ''}/>
+                                    <img className="cartImage" src={products.find( i => i.id === cartItem.productId)? products.find( i => i.id === cartItem.productId).imageUrl : ''}/>
                                     <div className="cartProduct">
                                         <div className="cartPName"> { cartItem.productName } </div>
                                         <div className="SKU"> #00-{Math.round(Math.random()*1000)+100000} </div>

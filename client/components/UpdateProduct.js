@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
 import {updateProduct} from '../store/productsReducer'
+import {Link} from 'react-router-dom';
 
 
 class UpdateProduct extends Component {

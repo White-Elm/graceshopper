@@ -20,7 +20,7 @@ const AdminSingleProduct = ({products, match: {params: {id}} , history}) =>{
 
     return(
         <div>
-            <Link to='/Admin/Products'>Back to Admin Products</Link>
+            <Link to='/Admin/Products'>Back to Manage All Products</Link>
             <div>
                 <img src={product.imageUrl ? product.imageUrl : ''}/>
             </div>

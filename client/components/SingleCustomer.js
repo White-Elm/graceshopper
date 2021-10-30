@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
 import UpdateCustomer from './UpdateCustomer';
-
+import {Link} from 'react-router-dom';
 
 const SingleCustomer = ({customers, match: {params: {id}} , history}) =>{
     if(customers.length === 0){
@@ -13,6 +13,7 @@ const SingleCustomer = ({customers, match: {params: {id}} , history}) =>{
     }
     return(
         <div>
+            <Link to='/Admin/Customers'>Back to Manage All Customers</Link>
             <div>Customer Details</div>
             <div>{customer.firstName}</div> 
             <div>{customer.lastName}</div> 

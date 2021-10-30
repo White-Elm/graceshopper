@@ -134,7 +134,7 @@ class Products extends Component{
                                     <img className="productImage" src={product.imageUrl ? product.imageUrl : 'https://st4.depositphotos.com/14953852/22772/v/600/depositphotos_227725020-stock-illustration-image-available-icon-flat-vector.jpg'}/>
                                     {/* <Link to={`/products/${product.id}`}> { product.name }, price: { product.cost} </Link> */}
                                     <Link to={`/products/${product.id}`}> { product.name }</Link>
-                                    <Link to={`/products/${product.id}`}> price: { product.cost} </Link>
+                                    <Link to={`/products/${product.id}`}> price: ${ product.cost} </Link>
                                 </div>
                             </li>
                         )

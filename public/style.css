@@ -491,3 +491,34 @@ form div {
   width: 200px;
 
 }
+
+.addCustomerInfo label {
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+  padding: 5px;
+  font-size: 15px;
+}
+
+.addCustomerInfo input {
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+  padding: 5px;
+  font-size: 14px;
+}
+
+.addCustomerInfo button {
+  background-color: darksalmon;
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+  font-size: 15px;
+  margin-top: 15px;
+  margin-right: 5px;
+  align-items: center;
+  padding: 5px;
+}
+
+.addCustomerInfo {
+  position: absolute;
+  margin-left: 500px;
+  /* display: flex;
+  flex-direction: column;
+  justify-content: center;
+  width: 100vw; */
+}

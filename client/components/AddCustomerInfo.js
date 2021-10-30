@@ -44,15 +44,18 @@ class AddCustomerInfo extends Component {
         return(
             <div>
                 <h2>Welcome! Please enter your info below!</h2>
-                <form name='updateCustomerForm' onSubmit={onSubmit}>
-                    <label>First Name</label>
-                    <input value={firstName} name='firstName' onChange={onChange}/>
-                    <label>Last Name</label>
-                    <input value={lastName} name='lastName' onChange={onChange}/>
-                    <label>Address</label>
-                    <input value={address} name='address' onChange={onChange}/>
-                    <button>Update Customer Info</button>
-                </form>
+                <div className="addCustomerInfo">
+                    <form name='updateCustomerForm' onSubmit={onSubmit}>
+                        <label>First Name</label>
+                        <input value={firstName} name='firstName' onChange={onChange}/>
+                        <label>Last Name</label>
+                        <input value={lastName} name='lastName' onChange={onChange}/>
+                        <label>Address</label>
+                        <input value={address} name='address' onChange={onChange}/>
+                        <br/>
+                        <button>Update Customer Info</button>
+                    </form>
+                </div>
         </div>
         )
     }

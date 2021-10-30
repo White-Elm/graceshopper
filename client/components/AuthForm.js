@@ -33,6 +33,7 @@ const AuthForm = props => {
 }
 
 /**
+
  * CONTAINER
  *   Note that we have two different sets of 'mapStateToProps' functions -
  *   one for Login, and one for Signup. However, they share the same 'mapDispatchToProps'
@@ -55,7 +56,7 @@ const mapSignup = state => {
   }
 }
 
-const mapDispatch = dispatch => {
+const mapDispatch = (dispatch, { history }) => {
   return {
     handleSubmit(evt) {
       evt.preventDefault()
@@ -63,6 +64,7 @@ const mapDispatch = dispatch => {
       const username = evt.target.username.value
       const password = evt.target.password.value
       dispatch(authenticate(username, password, formName))
+      history.push('/home')
     }
   }
 }

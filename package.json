@@ -31,6 +31,7 @@
     "morgan": "^1.9.1",
     "path": "^0.12.7",
     "pg": "^8.5.1",
+    "process": "^0.11.10",
     "react-stripe-checkout": "^2.6.3",
     "sequelize": "^6.3.5",
     "stripe": "^8.184.0"
@@ -43,6 +44,8 @@
     "axios-mock-adapter": "^1.16.0",
     "babel-loader": "^8.2.2",
     "chai": "^4.2.0",
+    "dotenv": "^10.0.0",
+    "dotenv-webpack": "^7.0.3",
     "enzyme": "^3.9.0",
     "enzyme-adapter-react-16": "^1.12.1",
     "esm": "^3.2.25",

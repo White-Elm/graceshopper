@@ -10,7 +10,6 @@ const Customer = db.define('customer',{
     },
     address:{
         type:Sequelize.STRING,
-        allowNull: false
     }
 });
 

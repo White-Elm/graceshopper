@@ -25,7 +25,7 @@ export const Checkout = ({ isLoggedIn, userId, cart, customers }) => {
   }
   document.addEventListener("event", function(){
     alert('Thanks for shopping at White Elm!')
-    window.location.href ="http://localhost:8080/"
+    window.location.href ="http://localhost:8080/home"
   })
   
   return (
@@ -45,14 +45,6 @@ export const Checkout = ({ isLoggedIn, userId, cart, customers }) => {
               <li>
                 Total: ${ (cartTotal + taxes + shipping).toFixed(2) }
               </li>
-              < StripeCheckout 
-        stripeKey= {stripePK}
-        amount={stripeTotal * 100}
-        name= "Checkout"
-        token={handleToken}
-        billingAddress
-        shippingAddress
-      />
               {/* placeholder: Payment component goes here */}
             </ul>
           ) : (
